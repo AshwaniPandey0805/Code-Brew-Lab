@@ -12,11 +12,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         e.preventDefault();
 
-        // Load form Data into an object
-        loadFormDataIntoAnObject();
+        const formData = loadFormDataIntoAnObject();
 
         // Validate the form data
-        isFormValid();
+        if (isFormValid()) {
+            // All validations passed, you can now use the formData object
+            console.log("Form data is valid:", formData);
+        }
     }
 
     
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         }
 
-        console.log(formData);
+        return formData;
     }
 
     // function to validate form data
@@ -72,7 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
         validatePassword();
 
         // validate confirm password
-        validateConfirmPassword();
+        validateConfirmPassword()
+
+        const errorElements = document.querySelectorAll('.error');
+        return errorElements.length === 0;
+
+        
     }
 
     //Real Time Validation
