@@ -7,7 +7,38 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Form Validation</h1>
+    <div class="container">
+        <form id="form" class="form">
+            <h1>Registure With Us</h1>
+            <div class="form-control ">
+                <label for="username">Username:</label>
+                <input type="text" id="username"  placeholder="Enter Username">
+                <small>Error Message Will Displayed Here</small>
+            </div>
+            <div class="form-control">
+                <label for="email">Email:</label>
+                <input type="text" id="email" placeholder="Enter Email">
+                <small>Error Message Will Displayed</small>
+            </div>
+            <div class="form-control">
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" placeholder="Enter Phone Number">
+                <small>Error Message Will Displayed</small>
+            </div>
+            <div class="form-control">
+                <label for="password">Password:</label>
+                <input type="password" id="password">
+                <small>Error Message Will Displayed</small>
+            </div>
+            <div class="form-control">
+                <label for="cpassword">Confirm Password:</label>
+                <input type="password" id="cpassword" >
+                <small>Error Message Will Displayed</small>
+            </div>
+            <button type="button" >Submit</button>
+            <button type="reset" >Reset</button>
+        </form>
+    </div>
     
     <script src="index.js" ></script>
 </body>
