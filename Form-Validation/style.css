@@ -9,22 +9,47 @@ body{
     color: white;
     font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     height: 100vh;
     
+    flex-direction: row;
     
 }
 /* main container  */
-.container{
+.container, .list-container{
     background-color: #fff;
     border: 1px solid brown;
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 400px;
+    width: 50%;
+    padding: 20px;
+    margin: 20px;
+    
     
 }
+
+.main-content{
+    display: flex;
+    flex-direction: row;
+
+
+}
+
+/* .left {
+    width: 50%;
+}
+
+.right{
+    width: 50%;
+} */
+.left, .right{
+    width: 50%;
+    padding: 4px;
+    margin: 4px;
+}
+
 h1{
     margin: 0 0 20px;
     text-align: center;
@@ -92,7 +117,8 @@ button[type=submit]{
     color: #fff;
     padding: 10px;
     display: block;
-    width: 100%;
+    width: 75%;
+    margin: auto;
     margin-top: 10px;
     text-transform: uppercase;
 }
@@ -106,8 +132,70 @@ button[type=reset]{
     color: #fff;
     padding: 10px;
     display: block;
-    width: 100%;
+    width: 75%;
+    margin: auto;
     margin-top: 10px;
     text-transform: uppercase;
 
 }
+
+
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #777;
+    border-color: #777;
+    font-size: 16px; 
+    color: #333; 
+    background-color: #fff; 
+}
+
+
+select option {
+    padding: 10px; 
+}
+
+/* Apply basic styles to the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+/* Apply styles to the table header */
+thead {
+    background-color: #f2f2f2; /* Light gray background */
+}
+
+th {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Apply alternating row colors to improve readability */
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lighter gray background for even rows */
+}
+
+/* Style the cells */
+td {
+    padding: 12px;
+    text-align: left;
+}
+
+/* Add border to cells and header */
+th, td {
+    border: 1px solid #ddd; /* Light gray border */
+}
+
+/* Hover effect for better interactivity */
+tbody tr:hover {
+    background-color: #e0e0e0; /* Light gray background on hover */
+}
+
+#startDateContainer{
+    margin-top: 10px;
+}
+
+

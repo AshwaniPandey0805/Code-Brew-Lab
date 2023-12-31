@@ -10,34 +10,105 @@
     <div class="container">
         <form id="form" class="form">
             <h1>Registure With Us</h1>
-            <div class="form-control ">
-                <label for="username">Username:</label>
-                <input type="text" id="username"  placeholder="Enter Username">
-                <small>Error Message Will Displayed Here</small>
-            </div>
-            <div class="form-control">
-                <label for="email">Email:</label>
-                <input type="text" id="email" placeholder="Enter Email">
-                <small>Error Message Will Displayed</small>
-            </div>
-            <div class="form-control">
-                <label for="phone">Phone Number:</label>
-                <input type="text" id="phone" placeholder="Enter Phone Number">
-                <small>Error Message Will Displayed</small>
-            </div>
-            <div class="form-control">
-                <label for="password">Password:</label>
-                <input type="password" id="password">
-                <small>Error Message Will Displayed</small>
-            </div>
-            <div class="form-control">
-                <label for="cpassword">Confirm Password:</label>
-                <input type="password" id="cpassword" >
-                <small>Error Message Will Displayed</small>
+            <div class="main-content">
+                <div class="left">
+                    <div class="form-control ">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username"  placeholder="Enter Username">
+                        <small>Error Message Will Displayed Here</small>
+                    </div>
+                    <div class="form-control">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" placeholder="Enter Email">
+                        <small>Error Message Will Displayed</small>
+                    </div>
+                    <div class="form-control">
+                        <label for="phone">Phone Number:</label>
+                        <input type="text" id="phone" placeholder="Enter Phone Number">
+                        <small>Error Message Will Displayed</small>
+                    </div>
+                    <div class="form-control">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password">
+                        <small>Error Message Will Displayed</small>
+                    </div>
+                    <div class="form-control">
+                        <label for="cpassword">Confirm Password:</label>
+                        <input type="password" id="cpassword" >
+                        <small>Error Message Will Displayed</small>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="form-control">
+                        <label for="subject">Select Subject</label>
+                        <select name="subject" id="subjects">
+                            <option value="">Select</option>
+                            <option value="Math">Math</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Hindi">Hindi</option>
+                        </select>
+                        <small>Please select a subject</small>
+                    </div>
+                    <div class="form-control" id="genderContainer">
+                        <label for="gender">Gender</label>
+                        <div>
+                            <label for="male">Male</label>
+                            <input type="radio" id="male" name="gender" value="male">
+                        
+                            <label for="female">Female</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                        
+                            <label for="other">Other</label>
+                            <input type="radio" id="other" name="gender" value="other">
+                        </div>
+                        <small id="genderError">Please select a gender</small>
+                    </div>
+                    <div class="form-control" id="startDateContainer">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate">
+                        <small id="startDateError">Please select a start date</small>
+                    </div>
+                    
+                    <div class="form-control" id="endDateContainer">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" name="endDate">
+                        <small id="endDateError">Please select an end date</small>
+                    </div>
+                </div>
             </div>
             <button type="submit" >Submit</button>
             <button type="reset" >Reset</button>
         </form>
+    </div>
+    <div class="list-container">
+        <table class="table" >
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Subjects</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe</td>
+                    <td>johndoe@example.com</td>
+                    <td>(555) 123-4567</td>
+                    <td>Math</td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>janesmith@example.com</td>
+                    <td>(555) 987-6543</td>
+                    <td>English</td>
+                </tr>
+                <!-- Add more rows with dummy data as needed -->
+            </tbody>
+        </table>
+            
+
     </div>
     
     <script src="index.js" ></script>

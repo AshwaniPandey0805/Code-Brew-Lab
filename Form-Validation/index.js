@@ -5,8 +5,29 @@ document.addEventListener('DOMContentLoaded', function () {
     const phoneNumber = document.getElementById("phone");
     const password = document.getElementById("password");
     const cpassword = document.getElementById("cpassword");
+    const subject = document.getElementById("subjects");
+    const genderRadios = document.getElementsByName("gender");
+    const genderContainer = document.getElementById("genderContainer");
+    const genderError = document.getElementById("genderError");
+    const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("endDate");
+    const startDateContainer = document.getElementById("startDateContainer");
+    const endDateContainer = document.getElementById("endDateContainer");
+    const startDateError = document.getElementById("startDateError");
+    const endDateError = document.getElementById("endDateError");
+    const resetButton = document.querySelector('button[type="reset"]');
 
     form.addEventListener('submit', onFormSubmit)
+
+    startDate.addEventListener('input', function () {
+        endDate.min = startDate.value;
+        
+       
+    });
+
+    resetButton.addEventListener('click', resetForm);
+
+    
 
     function onFormSubmit(e){
 
@@ -21,6 +42,42 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function resetForm() {
+        form.reset();
+    
+        // Reset error styles and messages
+        resetField(username, genderContainer, genderError);
+        resetField(email, startDateContainer);
+        resetField(phoneNumber);
+        resetField(password);
+        resetField(cpassword);
+
+        genderContainer.className = 'form-control';
+        genderError.innerText = "";
+        startDateContainer.className = 'form-control';
+        endDateContainer.className = 'form-control';
+    
+        // Additional fields can be added in a similar manner
+    }
+
+    function resetField(inputField, ...additionalContainers) {
+        // Reset individual field
+        inputField.parentElement.className = 'form-control';
+        const smallElement = inputField.parentElement.querySelector('small');
+        if (smallElement) {
+            smallElement.innerText = "";
+        }
+    
+        // Reset additional containers if provided
+        additionalContainers.forEach(container => {
+            container.className = 'form-control';
+            const errorElement = container.querySelector('small');
+            if (errorElement) {
+                errorElement.innerText = "";
+            }
+        });
+    }
+
     
     // function to load form data to an object
     function loadFormDataIntoAnObject(){
@@ -31,6 +88,11 @@ document.addEventListener('DOMContentLoaded', function () {
             phoneNumber : Number(phoneNumber.value),
             password : password.value,
             cpassword : cpassword.value,
+            subjects : subject.value,
+            genderRadios : Array.from(genderRadios).some(radio => radio.value),
+            startDate : startDate.value,
+            endDate : endDate.value,
+
 
         }
 
@@ -75,6 +137,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // validate confirm password
         validateConfirmPassword()
+
+        // validate subject field
+        validateSubject();
+
+        // Validate gender
+        validateGender();
+
+        // Validate Start and End Dates
+        validateDates();
+
 
         const errorElements = document.querySelectorAll('.error');
         return errorElements.length === 0;
@@ -183,6 +255,74 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Subject Validation
+    function validateSubject() {
+        const subjectValue = subject.value;
+        
 
+        if (subjectValue === "") {
+            showError(subject, "Please select a subject");
+        } else {
+            showSuccess(subject);
+        }
+    }
+
+    // validate Gender
+    function validateGender() {
+        const selectedGender = Array.from(genderRadios).some(radio => radio.checked);
+
+        if (!selectedGender) {
+            showErrorGender(genderContainer, genderError, "Please select a gender");
+        } else {
+            showSuccessGender(genderContainer);
+        }
+    }
+
+    function showErrorGender(inputContainer, errorElement, message) {
+        inputContainer.className = 'form-control error';
+        errorElement.innerText = message;
+    }
+
+    function showSuccessGender(inputContainer) {
+        inputContainer.className = 'form-control success';
+    }
+
+    function validateDates() {
+        const startDateValue = startDate.value;
+        const endDateValue = endDate.value;
+
+        if (startDateValue === "") {
+            showErrorDate(startDateContainer, startDateError, "Please select a start date");
+        } else {
+            showSuccessDate(startDateContainer);
+        }
+
+        if (endDateValue === "") {
+            showErrorDate(endDateContainer, endDateError, "Please select an end date");
+        } else {
+            showSuccessDate(endDateContainer);
+        }
+
+        // Additional validation for end date being later than start date
+        if (startDateValue !== "" && endDateValue !== "") {
+            const startDateObj = new Date(startDateValue);
+            const endDateObj = new Date(endDateValue);
+
+            if (startDateObj > endDateObj) {
+                showErrorDate(endDateContainer, endDateError, "End date must be later than the start date");
+            } else {
+                showSuccessDate(endDateContainer);
+            }
+        }
+    }
+
+    function showErrorDate(inputContainer, errorElement, message) {
+        inputContainer.className = 'form-control error';
+        errorElement.innerText = message;
+    }
+
+    function showSuccessDate(inputContainer) {
+        inputContainer.className = 'form-control success';
+    }
 
 });
