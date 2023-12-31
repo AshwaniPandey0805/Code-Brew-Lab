@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Validate the form data
         if (isFormValid()) {
             // All validations passed, you can now use the formData object
-            console.log("Form data is valid:", formData);
+            //console.log("Form data is valid:", formData);
+            addDataToTable(formData);
         }
     }
 
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
         resetField(phoneNumber);
         resetField(password);
         resetField(cpassword);
+        resetField(subject)
 
         genderContainer.className = 'form-control';
         genderError.innerText = "";
@@ -323,6 +325,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function showSuccessDate(inputContainer) {
         inputContainer.className = 'form-control success';
+    }
+
+
+    // Adding Data to the table
+    function addDataToTable(data){
+        
+        const tbody = document.querySelector("tbody");
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+            <td><input type="checkbox"></td>
+            <td>${data.username}</td>
+            <td>${data.email}</td>
+            <td>${data.phoneNumber}</td>
+            <td>${data.subjects}</td>
+            <td>${data.genderRadios}</td>
+            <td>${data.startDate}</td>
+            <td>${data.endDate}</td>
+            <td>
+                <button class="edit-btn" >Edit</button><br>
+                <button class="delete-btn">Delete</button>
+            </td>
+
+        `
+
+        tbody.appendChild(tr);
+
+
     }
 
 });
