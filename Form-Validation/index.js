@@ -56,25 +56,54 @@ document.addEventListener('DOMContentLoaded', function () {
     function isFormValid(){
 
         // valid username
-        const userNameValue = username.value.trim();
-        if(userNameValue === ""){
-            showError(username, "Please Enter Username")
-        } 
-        else if(userNameValue.length < 3){
-            showError(username, "Username Must be atleast 3 characters long") 
-        }else if(userNameValue.length > 20){
-            showError(username, "Username cannot be exceed 20 characters")
-        }else if(!/^[a-zA-Z0-9 ]+$/.test(userNameValue)) {
-            showError(username,"Username can only contain letters and numbers");
-        }else if (userNameValue.includes(" ")) {
-            showError(username,"Username cannot contain spaces");
-        }
-        else{
-            showSuccess(username)
-        }
+        validateUsername();
 
     
 
+        // Validate Email
+        validateEmail();
+
+
+
+        // validate Phone Numbe 
+        validatePhoneNumber();
+
+        // Validate Password
+        validatePassword();
+
+        // validate confirm password
+        validateConfirmPassword();
+    }
+
+    //Real Time Validation
+
+    // Username Name validation 
+    username.addEventListener('input', validateUsername)
+
+    function validateUsername(){
+         // valid username
+         const userNameValue = username.value.trim();
+         if(userNameValue === ""){
+             showError(username, "Please Enter Username")
+         } 
+         else if(userNameValue.length < 3){
+             showError(username, "Username Must be atleast 3 characters long") 
+         }else if(userNameValue.length > 20){
+             showError(username, "Username cannot be exceed 20 characters")
+         }else if(!/^[a-zA-Z0-9 ]+$/.test(userNameValue)) {
+             showError(username,"Username can only contain letters and numbers");
+         }else if (userNameValue.includes(" ")) {
+             showError(username,"Username cannot contain spaces");
+         }
+         else{
+             showSuccess(username)
+         }
+    }
+
+    // Email Validation
+    email.addEventListener('input', validateEmail);
+
+    function validateEmail(){
         // Validate Email
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         const emailValue = email.value.trim();
@@ -87,8 +116,12 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(email);
         }
 
+    }
 
+    // Validate Phone number
+    phoneNumber.addEventListener('input', validatePhoneNumber);
 
+    function validatePhoneNumber(){
         // validate Phone Numbe 
         const phoneRegex = /^\+?[0-9\s\-]{10,15}$/;
         const phoneNumberValue = phoneNumber.value.trim();
@@ -100,7 +133,12 @@ document.addEventListener('DOMContentLoaded', function () {
         else{
             showSuccess(phoneNumber);
         }
+    }
 
+    //validate password
+    password.addEventListener('input', validatePassword);
+
+    function validatePassword(){
         // Validate Password
         const passwordValue = password.value.trim();
         if(passwordValue === ""){
@@ -119,8 +157,14 @@ document.addEventListener('DOMContentLoaded', function () {
         else{
             showSuccess(password);
         }
+    }
 
+    // Validate confirm passowrd
+    cpassword.addEventListener("input", validateConfirmPassword);
+
+    function validateConfirmPassword(){
         // validate confirm password
+        const passwordValue = password.value.trim();
         const cpasswordValue = cpassword.value.trim();
         if(cpasswordValue === ""){
             showError(cpassword, "Please Enter to confirm passowrd");
@@ -131,5 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(cpassword);
         }
     }
-});
 
+
+
+});
