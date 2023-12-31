@@ -83,7 +83,7 @@ h1{
     visibility: visible;
 }
 
-button[type=button]{
+button[type=submit]{
     cursor: pointer;
     background-color: #3498db;
     border: 1px solid #3498db;
