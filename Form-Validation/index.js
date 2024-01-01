@@ -37,48 +37,29 @@ document.addEventListener('DOMContentLoaded', function () {
         const formData = loadFormDataIntoAnObject();
 
         // Validate the form data
-        if (isFormValid()) {
-            // adding data to the table
-            addDataToTable(formData);
-        }
-    }
-
-    function resetForm() {
-        form.reset();
-    
-        // Reset error styles and messages
-        resetField(username, genderContainer, genderError);
-        resetField(email, startDateContainer);
-        resetField(phoneNumber);
-        resetField(password);
-        resetField(cpassword);      
-        resetField(subject)
-
-        genderContainer.className = 'form-control2';
-        genderError.innerText = "";
-        startDateContainer.className = 'form-control';
-        endDateContainer.className = 'form-control';
-    
-        // Additional fields can be added in a similar manner
-    }
-
-    function resetField(inputField, ...additionalContainers) {
-        // Reset individual field
-        inputField.parentElement.className = 'form-control';
-        const smallElement = inputField.parentElement.querySelector('small');
-        if (smallElement) {
-            smallElement.innerText = "";
-        }
-    
-        // Reset additional containers if provided
-        additionalContainers.forEach(container => {
-            container.className = 'form-control';
-            const errorElement = container.querySelector('small');
-            if (errorElement) {
-                errorElement.innerText = "";
+        if (isEmailUnique(formData.email)) {
+            // Validate the form data
+            if (isFormValid()) {
+                // Add data to the table
+                addDataToTable(formData);
             }
-        });
+        } else {
+            // Show error if email already exists
+            alert("Email already exists. Please use a different email.")
+        }
+
+
+        // Function to check if the email is unique
+    function isEmailUnique(emailValue) {
+        console.log("check")
+        const existingEmails = Array.from(document.querySelectorAll('.data-table tbody td:nth-child(3)')).map(td => td.textContent);
+        return !existingEmails.includes(emailValue);
     }
+
+    }
+
+    
+    
 
     
     // function to load form data to an object
@@ -415,5 +396,44 @@ document.addEventListener('DOMContentLoaded', function () {
             updateDeleteCheckboxes();
         });
     });
+
+
+    // from reset functionality
+    function resetForm() {
+        form.reset();
+    
+        // Reset error styles and messages
+        resetField(username, genderContainer, genderError);
+        resetField(email, startDateContainer);
+        resetField(phoneNumber);
+        resetField(password);
+        resetField(cpassword);      
+        resetField(subject)
+
+        genderContainer.className = 'form-control2';
+        genderError.innerText = "";
+        startDateContainer.className = 'form-control';
+        endDateContainer.className = 'form-control';
+    
+        // Additional fields can be added in a similar manner
+    }
+
+    function resetField(inputField, ...additionalContainers) {
+        // Reset individual field
+        inputField.parentElement.className = 'form-control';
+        const smallElement = inputField.parentElement.querySelector('small');
+        if (smallElement) {
+            smallElement.innerText = "";
+        }
+    
+        // Reset additional containers if provided
+        additionalContainers.forEach(container => {
+            container.className = 'form-control';
+            const errorElement = container.querySelector('small');
+            if (errorElement) {
+                errorElement.innerText = "";
+            }
+        });
+    }
 
 });
