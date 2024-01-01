@@ -47,21 +47,16 @@ document.addEventListener('DOMContentLoaded', function () {
             // Show error if email already exists
             alert("Email already exists. Please use a different email.")
         }
-
-
-        // Function to check if the email is unique
-    function isEmailUnique(emailValue) {
-        console.log("check")
-        const existingEmails = Array.from(document.querySelectorAll('.data-table tbody td:nth-child(3)')).map(td => td.textContent);
-        return !existingEmails.includes(emailValue);
     }
 
-    }
+        //Function to check if the email is unique
+        function isEmailUnique(emailValue) {
+            console.log("check")
+            const existingEmails = Array.from(document.querySelectorAll('.data-table tbody td:nth-child(3)')).map(td => td.textContent);
+            return !existingEmails.includes(emailValue);
+        }    
 
-    
-    
 
-    
     // function to load form data to an object
     function loadFormDataIntoAnObject(){
         // store form into an object
@@ -389,6 +384,7 @@ document.addEventListener('DOMContentLoaded', function () {
         button.addEventListener('click', function () {
             const row = button.closest('tr');
             row.remove();
+            
             const allChecked = [...deleteCheckboxes].every(checkbox => checkbox.checked);
             selectAllCheckbox.checked = allChecked;
     
@@ -399,6 +395,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // from reset functionality
+    
     function resetForm() {
         form.reset();
     
@@ -435,5 +432,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
 
 });

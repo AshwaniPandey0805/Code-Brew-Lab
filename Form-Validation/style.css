@@ -274,5 +274,7 @@ tbody tr:hover {
     border-radius: 4px;
     color: #fff;
     font-weight: 500;
+    float: right;
+    margin-top: 20px;
 
 }
