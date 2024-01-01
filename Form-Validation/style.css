@@ -183,8 +183,8 @@ thead {
 }
 
 th {
-    padding: 10px;
-    text-align: left;
+    padding: 5px;
+    text-align: center;
 }
 
 /* Apply alternating row colors to improve readability */
@@ -194,8 +194,8 @@ tbody tr:nth-child(even) {
 
 /* Style the cells */
 td {
-    padding: 10px;
-    text-align: left;
+    padding: 5px;
+    text-align: center  ;
 }
 
 /* Add border to cells and header */
@@ -212,17 +212,9 @@ tbody tr:hover {
     margin-top: 10px;
 }
 
-.edit-btn{
-    background-color: #23cc71;
-    padding: 2px;
-    border-radius: 2px;
-    border: 1px solid #23cc71;
-    width: 100%;
-    margin: 2px;
-    color: white;
-}
 
-.delete-btn{
+
+.delete-row{
     background-color: #e74c3e;
     padding: 2px;
     border-radius: 2px;
@@ -272,4 +264,15 @@ tbody tr:hover {
 
 .gender-div{
     margin-top: 10px;
+}
+
+.delete-all{
+    padding: 10px;
+    background-color: #e74c3e;
+    border-color: #e74c3e;
+    border: 1px solid #e74c3e;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 500;
+
 }

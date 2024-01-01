@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const startDateError = document.getElementById("startDateError");
     const endDateError = document.getElementById("endDateError");
     const resetButton = document.querySelector('button[type="reset"]');
+    
 
     form.addEventListener('submit', onFormSubmit)
 
@@ -328,15 +329,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    // Adding Data to the table
-    function addDataToTable(data){
-        
+    function addDataToTable(data) {
         const tbody = document.querySelector("tbody");
-
+    
         const tr = document.createElement("tr");
-
+    
         tr.innerHTML = `
-            <td><input type="checkbox"></td>
+            <td><input type="checkbox" class="delete-checkbox"></td>
             <td>${data.username}</td>
             <td>${data.email}</td>
             <td>${data.phoneNumber}</td>
@@ -345,31 +344,76 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${data.startDate}</td>
             <td>${data.endDate}</td>
             <td>
-                <button class="edit-btn" >Edit</button><br>
-                <button class="delete-btn">Delete</button>
+                <button class="delete-row">Delete</button>
             </td>
-
-        `
-
+        `;
+    
         tbody.appendChild(tr);
-
-
+    
+        // Update the NodeList after adding the new row
+        updateDeleteCheckboxes();
     }
 
-    // deleting individual row from a table
-    const tableEl = document.querySelector("table");
 
-    tableEl.addEventListener("click", onDeleteRow);
+    const tableEl = document.querySelector('table');
+
+    tableEl.addEventListener('click', onDeleteRow);
 
     function onDeleteRow(e){
-        if(!e.target.classList.contains("delete-btn")){
+        if(!e.target.classList.contains("delete-row")){
             return;
         }
 
         const btn = e.target;
-        btn.closest("tr").remove();
+        btn.closest('tr').remove();
     }
-
-
+    
+    // Function to update the deleteCheckboxes NodeList
+    function updateDeleteCheckboxes() {
+        deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
+    }
+    
+    // delete functionality
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const deleteAllButton = document.querySelector('.delete-all');
+    let deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
+    const deleteRowButtons = document.querySelectorAll('.delete-row');
+    
+    // Event listener for "Select All" checkbox
+    selectAllCheckbox.addEventListener('change', function () {
+        const isChecked = selectAllCheckbox.checked;
+        deleteCheckboxes.forEach(checkbox => (checkbox.checked = isChecked));
+    });
+    
+    // Event listener for individual row checkboxes
+    deleteCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const allChecked = [...deleteCheckboxes].every(checkbox => checkbox.checked);
+            selectAllCheckbox.checked = allChecked;
+        });
+    });
+    
+    // Event listener for "Delete All" button
+    deleteAllButton.addEventListener('click', function () {
+        const checkedRows = [...deleteCheckboxes].filter(checkbox => checkbox.checked);
+        checkedRows.forEach(checkbox => checkbox.closest('tr').remove());
+        selectAllCheckbox.checked = false;
+    
+        // Update the NodeList after deleting rows
+        updateDeleteCheckboxes();
+    });
+    
+    // Event listener for individual row "Delete" buttons
+    deleteRowButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const row = button.closest('tr');
+            row.remove();
+            const allChecked = [...deleteCheckboxes].every(checkbox => checkbox.checked);
+            selectAllCheckbox.checked = allChecked;
+    
+            // Update the NodeList after deleting a row
+            updateDeleteCheckboxes();
+        });
+    });
 
 });
