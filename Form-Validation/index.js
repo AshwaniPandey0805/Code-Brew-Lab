@@ -37,8 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Validate the form data
         if (isFormValid()) {
-            // All validations passed, you can now use the formData object
-            //console.log("Form data is valid:", formData);
+            // adding data to the table
             addDataToTable(formData);
         }
     }
@@ -51,10 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
         resetField(email, startDateContainer);
         resetField(phoneNumber);
         resetField(password);
-        resetField(cpassword);
+        resetField(cpassword);      
         resetField(subject)
 
-        genderContainer.className = 'form-control';
+        genderContainer.className = 'form-control2';
         genderError.innerText = "";
         startDateContainer.className = 'form-control';
         endDateContainer.className = 'form-control';
@@ -281,14 +280,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function showErrorGender(inputContainer, errorElement, message) {
-        inputContainer.className = 'form-control error';
+        inputContainer.className = 'form-control2 error';
         errorElement.innerText = message;
     }
 
     function showSuccessGender(inputContainer) {
-        inputContainer.className = 'form-control success';
+        inputContainer.className = 'form-control2 success';
     }
 
+    // validate date
     function validateDates() {
         const startDateValue = startDate.value;
         const endDateValue = endDate.value;
@@ -355,5 +355,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     }
+
+    // deleting individual row from a table
+    const tableEl = document.querySelector("table");
+
+    tableEl.addEventListener("click", onDeleteRow);
+
+    function onDeleteRow(e){
+        if(!e.target.classList.contains("delete-btn")){
+            return;
+        }
+
+        const btn = e.target;
+        btn.closest("tr").remove();
+    }
+
+
 
 });

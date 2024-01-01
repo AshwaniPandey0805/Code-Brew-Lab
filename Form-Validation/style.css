@@ -18,7 +18,7 @@ body {
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 40%;
+    width: 35%;
     /* padding: 20px; */
     /* margin: 20px; */
     position: sticky;
@@ -34,7 +34,7 @@ body {
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 70%;
+    width: 65%;
     padding: 20px;
     margin: 20px;
     
@@ -62,8 +62,11 @@ body {
 }
 
 h1{
-    margin: 0 0 20px;
+    margin: 0 0 18px;
     text-align: center;
+    background-color: rgba(0,0,0,0.38);
+    padding: 10px;
+    border-radius: 5px;
 }
 
 
@@ -130,7 +133,7 @@ button[type=submit]{
     display: block;
     width: 75%;
     margin: auto;
-    margin-top: 10px;
+    margin-bottom: 16px;
     text-transform: uppercase;
 }
 
@@ -181,7 +184,7 @@ thead {
 
 th {
     padding: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 /* Apply alternating row colors to improve readability */
@@ -191,7 +194,7 @@ tbody tr:nth-child(even) {
 
 /* Style the cells */
 td {
-    padding: 12px;
+    padding: 10px;
     text-align: left;
 }
 
@@ -229,3 +232,44 @@ tbody tr:hover {
     color: white;
 }
 
+
+/* Radio Button  */
+.form-control2{
+    margin-bottom: 10px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.form-control2 label{
+    color: #777;
+    display: inline;
+    margin-bottom: 10px;
+
+}
+
+.form-control2 small{
+    color: #e74c3e;
+    position: absolute;
+    bottom: 1;
+    left: 1;
+    visibility: hidden;
+}
+
+.form-control2.error small{
+    visibility: visible;
+}
+/* .form-control2.success input{
+    border-color: #23cc71;
+} */
+
+.right div{
+    margin-bottom: 15px;
+}
+
+.right .form-control2{
+    margin-bottom: 18px;
+}
+
+.gender-div{
+    margin-top: 10px;
+}
