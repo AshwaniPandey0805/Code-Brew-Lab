@@ -175,17 +175,27 @@ table {
     width: 100%;
     border-collapse: collapse;
     
+    
+
+    
+    
 }
 
 /* Apply styles to the table header */
 thead {
-    background-color: #f2f2f2; /* Light gray background */
+    background-color: rgba(0,0,0,0.78); 
+    color: white;
+    border-radius: 10px;
+    
 }
 
 th {
     padding: 5px;
     text-align: center;
+    padding: 15px;
+    
 }
+
 
 /* Apply alternating row colors to improve readability */
 tbody tr:nth-child(even) {
@@ -196,6 +206,7 @@ tbody tr:nth-child(even) {
 td {
     padding: 5px;
     text-align: center  ;
+    
 }
 
 /* Add border to cells and header */
@@ -266,15 +277,26 @@ tbody tr:hover {
     margin-top: 10px;
 }
 
-.delete-all{
-    padding: 10px;
+.delete-all, .delete-selected{
+    padding: 15px;
     background-color: #e74c3e;
     border-color: #e74c3e;
     border: 1px solid #e74c3e;
     border-radius: 4px;
     color: #fff;
-    font-weight: 500;
-    float: right;
+    font-weight: 700;
     margin-top: 20px;
+    margin: 4px;
+    width: 300px;
+    text-transform: uppercase;
 
 }
+
+.tfoot{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    visibility: hidden;
+
+}
+

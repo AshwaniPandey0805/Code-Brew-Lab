@@ -16,6 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const startDateError = document.getElementById("startDateError");
     const endDateError = document.getElementById("endDateError");
     const resetButton = document.querySelector('button[type="reset"]');
+    const deleteAllButton = document.querySelector(".delete-all")
+    const tfoot = document.querySelector(".tfoot");
     
 
     form.addEventListener('submit', onFormSubmit)
@@ -36,12 +38,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const formData = loadFormDataIntoAnObject();
 
-        // Validate the form data
+    
+
+       // Validate the form data
         if (isEmailUnique(formData.email)) {
             // Validate the form data
             if (isFormValid()) {
                 // Add data to the table
                 addDataToTable(formData);
+                resetForm();
+
+                tfoot.style.visibility = "visible"
+
+
             }
         } else {
             // Show error if email already exists
@@ -52,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
         //Function to check if the email is unique
         function isEmailUnique(emailValue) {
             console.log("check")
+            // getting all email from the table
             const existingEmails = Array.from(document.querySelectorAll('.data-table tbody td:nth-child(3)')).map(td => td.textContent);
             return !existingEmails.includes(emailValue);
         }    
@@ -67,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
             password : password.value,
             cpassword : cpassword.value,
             subjects : subject.value,
-            genderRadios : Array.from(genderRadios).some(radio => radio.value),
+            gender: document.querySelector('input[name="gender"]:checked') ? document.querySelector('input[name="gender"]:checked').value : "",
             startDate : startDate.value,
             endDate : endDate.value,
 
@@ -168,6 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
             showError(email, "Please Enter Email")
         }else if(!emailRegex.test(emailValue)){
             showError(email, "Invalid Email format")
+        }else if(emailValue.length > 30){
+            showError(email, "Email cannot be more than 30 characters")
         }
         else{
             showSuccess(email);
@@ -316,7 +328,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${data.email}</td>
             <td>${data.phoneNumber}</td>
             <td>${data.subjects}</td>
-            <td>${data.genderRadios}</td>
+            <td>${data.gender}</td>
             <td>${data.startDate}</td>
             <td>${data.endDate}</td>
             <td>
@@ -351,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // delete functionality
     const selectAllCheckbox = document.getElementById('selectAll');
-    const deleteAllButton = document.querySelector('.delete-all');
+    const deleteSelectedButton = document.querySelector('.delete-selected');
     let deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
     const deleteRowButtons = document.querySelectorAll('.delete-row');
     
@@ -369,8 +381,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
     
-    // Event listener for "Delete All" button
-    deleteAllButton.addEventListener('click', function () {
+    // Event listener for Delete selected button
+    deleteSelectedButton.addEventListener('click', function () {
         const checkedRows = [...deleteCheckboxes].filter(checkbox => checkbox.checked);
         checkedRows.forEach(checkbox => checkbox.closest('tr').remove());
         selectAllCheckbox.checked = false;
@@ -433,5 +445,20 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // delete all fucntionality
+    deleteAllButton.addEventListener("click", deleteAllRows);
+    
+    function deleteAllRows(){
+
+        const askForDelete = prompt('Are you sure, you want to delete all')
+
+            if(askForDelete === "yes" || askForDelete === "YES" || askForDelete === "Yes"){
+                const tbody = document.querySelector('tbody');
+                tbody.innerHTML = "";
+                tfoot.style.visibility = "hidden"
+
+            }
+            
+        }
 
 });

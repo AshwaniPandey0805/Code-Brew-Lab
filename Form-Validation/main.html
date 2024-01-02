@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <form id="form" class="form">
-            <h1>Registure With Us</h1>
+            <h1>Registration With Us 💻</h1>
             <div class="main-content">
                 <div class="left">
                     <div class="form-control ">
@@ -50,14 +50,15 @@
                         </select>
                         <small>Please select a subject</small>
                     </div>
+                   
                     <div class="form-control2" id="genderContainer">
                         <label for="gender">Gender</label>
                         <div class="gender-div">
                             <label for="male">Male</label>
-                            <input type="radio" id="male" name="gender" value="male">
+                            <input type="radio" id="male" name="gender" value="Male">
                         
                             <label for="female">Female</label>
-                            <input type="radio" id="female" name="gender" value="female">
+                            <input type="radio" id="female" name="gender" value="Female">
                         
                             
                         </div>
@@ -84,7 +85,7 @@
         <table class="table data-table">
             <thead>
                 <tr>
-                    <th><input type="checkbox" id="selectAll"></th>
+                    <th>Select All<input type="checkbox" id="selectAll"></th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -99,8 +100,16 @@
             <tbody>
                 
             </tbody>
+            <tfoot>
+                <th colspan="9">
+                    <div class="tfoot">
+                        <button class="delete-selected">Delete Selected</button>
+                        <button class="delete-all"">Delete All</button>
+                    </div>
+                </th>
+            </tfoot>
         </table>
-        <button class="delete-all">Delete Selected</button>
+        
             
 
     </div>
