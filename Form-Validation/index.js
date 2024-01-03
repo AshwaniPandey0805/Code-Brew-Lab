@@ -37,24 +37,39 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         const formData = loadFormDataIntoAnObject();
+        console.log(formData);
 
+        
+
+        
+       
     
 
-       // Validate the form data
+    //    // Validate unique email in the form
         if (isEmailUnique(formData.email)) {
-            // Validate the form data
-            if (isFormValid()) {
-                // Add data to the table
-                addDataToTable(formData);
-                resetForm();
+            // Validate unique number form data
+                if( isNumberUnique(formData.phoneNumber)){
+                    //vakidate form
+                    if (isFormValid()) {
+                        // Add data to the table
+                        addDataToTable(formData);
+                        // resetForm();
+            
+                        tfoot.style.visibility = "visible"
+                    }
 
-                tfoot.style.visibility = "visible"
 
+                }else{
+                    const phoneNumber = document.getElementById("phone");
+                    showError(phoneNumber, "Phone number already exits");
 
-            }
-        } else {
+                }
+            } 
+            else {
             // Show error if email already exists
-            alert("Email already exists. Please use a different email.")
+                const email = document.getElementById("email");
+                showError(email, "Email already exits")
+            
         }
     }
 
@@ -62,9 +77,24 @@ document.addEventListener('DOMContentLoaded', function () {
         function isEmailUnique(emailValue) {
             console.log("check")
             // getting all email from the table
-            const existingEmails = Array.from(document.querySelectorAll('.data-table tbody td:nth-child(3)')).map(td => td.textContent);
+
+            const row = document.querySelectorAll('.data-table tbody td:nth-child(3)')
+            //console.log(row)
+
+            const existingEmails = Array.from(row).map(td => td.textContent);
+            //console.log(existingEmails);
             return !existingEmails.includes(emailValue);
-        }    
+        }
+        
+        //Function to check if the number is unique
+        function isNumberUnique(number) {
+            console.log("check")
+            // getting all email from the table
+            const row = document.querySelectorAll('.data-table tbody td:nth-child(4)')
+            const existingNumber = Array.from(row).map(td => td.textContent);
+            console.log(existingNumber)
+            return !existingNumber.includes(number.toString());
+        } 
 
 
     // function to load form data to an object
@@ -83,6 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         }
+
+        // console.log(formData);
 
         return formData;
     }
@@ -104,6 +136,9 @@ document.addEventListener('DOMContentLoaded', function () {
         parentElement.className = 'form-control success';
 
     }
+
+    // Show userIsAvailable now
+    
 
     function isFormValid(){
 
@@ -354,6 +389,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const btn = e.target;
         btn.closest('tr').remove();
+
+        // make user email available for the uer
+        userIsNowAvilable(email, "Email is available");
+
+        
+
+    }
+ 
+    // function to make user is now Available for register
+    function userIsNowAvilable(input, Message){
+        const parentElement = input.parentElement;
+        parentElement.className = 'form-control successAvaialbe';
+        const smallElement = parentElement.querySelector('small');
+        smallElement.innerText = Message
+
     }
     
     // Function to update the deleteCheckboxes NodeList
@@ -456,6 +506,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 const tbody = document.querySelector('tbody');
                 tbody.innerHTML = "";
                 tfoot.style.visibility = "hidden"
+
+                resetForm();
 
             }
             

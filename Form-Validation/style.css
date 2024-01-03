@@ -122,6 +122,14 @@ h1{
     visibility: visible;
 }
 
+.form-control.successAvaialbe small{
+    visibility: visible;
+    color: #23cc71;
+    
+}
+.form-control.successAvaialbe input{
+    border-color: #23cc71;
+}
 button[type=submit]{
     cursor: pointer;
     background-color: #3498db;
