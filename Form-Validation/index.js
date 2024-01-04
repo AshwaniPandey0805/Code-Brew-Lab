@@ -18,6 +18,18 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.querySelector('button[type="reset"]');
     const deleteAllButton = document.querySelector(".delete-all")
     const tfoot = document.querySelector(".tfoot");
+    // var EditRow = document.querySelectorAll(".edit-row");
+    // console.log(EditRow,"jkdjkdjkjd");
+
+    // var EditRow = document.querySelectorAll(".edit-row");
+
+    // var EditRow;
+
+     // function to update user data
+    //  function updateUserData(){
+    //     alert("clicked")
+    // }
+    
     
 
     form.addEventListener('submit', onFormSubmit)
@@ -37,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
 
         const formData = loadFormDataIntoAnObject();
-        console.log(formData);
+        // console.log(formData);
 
         
 
@@ -51,11 +63,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 if( isNumberUnique(formData.phoneNumber)){
                     //vakidate form
                     if (isFormValid()) {
-                        // Add data to the table
-                        addDataToTable(formData);
-                        // resetForm();
-            
-                        tfoot.style.visibility = "visible"
+                            // Add data to the table
+                            addDataToTable(formData);
+                            resetForm();
+                            //  EditRow = document.querySelectorAll(".edit-row");
+                            //  console.log(EditRow,"jkdjkdjkjd");
+
+                            // var EditRow = document.querySelectorAll(".edit-row");
+                            // console.log(EditRow, "Ashwani")
+                            
+                            //
+                            //  function editUpdateButton(){
+                            //     // Update user data functionality
+                            //     // sir ka code h
+                            //     EditRow.forEach(button => {
+                            //         button.addEventListener("click", editCurrentRow);
+                            
+                            //     })
+
+                            //     // mera code h
+
+                            //     EditRow.addEventListener("click", updateUser);
+
+                            // }
+
+                            // EditRow.addEventListener("click", updateUser);
+
+                            // function updateUser(){
+                            //     alert("click");
+                            // }
+                        // function editCurrentRow(){
+                        //     console.log("hdhjdhdhdhdhdh");
+                        // }
+                            
+                            //editUpdateButton();
+                            tfoot.style.visibility = "visible"
                     }
 
 
@@ -75,24 +117,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //Function to check if the email is unique
         function isEmailUnique(emailValue) {
-            console.log("check")
+            // console.log("check")
             // getting all email from the table
 
             const row = document.querySelectorAll('.data-table tbody td:nth-child(3)')
             //console.log(row)
 
-            const existingEmails = Array.from(row).map(td => td.textContent);
+            const existingEmails = Array.from(row).map(td => td.textContent); // email ka array return kerke dy rha h
             //console.log(existingEmails);
             return !existingEmails.includes(emailValue);
         }
         
         //Function to check if the number is unique
         function isNumberUnique(number) {
-            console.log("check")
+            // console.log("check")
             // getting all email from the table
             const row = document.querySelectorAll('.data-table tbody td:nth-child(4)')
-            const existingNumber = Array.from(row).map(td => td.textContent);
-            console.log(existingNumber)
+            const existingNumber = Array.from(row).map(td => td.textContent); // phone number ka array return kerke dy rha h
+            // console.log(existingNumber)
             return !existingNumber.includes(number.toString());
         } 
 
@@ -144,29 +186,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // valid username
         validateUsername();
-
-    
-
         // Validate Email
         validateEmail();
-
-
-
         // validate Phone Numbe 
         validatePhoneNumber();
-
-        // Validate Password
+         // Validate Password
         validatePassword();
-
-        // validate confirm password
+         // validate confirm password
         validateConfirmPassword()
-
         // validate subject field
         validateSubject();
-
         // Validate gender
         validateGender();
-
         // Validate Start and End Dates
         validateDates();
 
@@ -303,6 +334,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Function to showErrorGender
     function showErrorGender(inputContainer, errorElement, message) {
         inputContainer.className = 'form-control2 error';
         errorElement.innerText = message;
@@ -367,6 +399,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${data.startDate}</td>
             <td>${data.endDate}</td>
             <td>
+                <button class="edit-row">Edit</button>
                 <button class="delete-row">Delete</button>
             </td>
         `;
@@ -378,9 +411,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    const tableEl = document.querySelector('table');
+    const tableEl1 = document.querySelector('table');
 
-    tableEl.addEventListener('click', onDeleteRow);
+    tableEl1.addEventListener('click', onDeleteRow);
 
     function onDeleteRow(e){
         if(!e.target.classList.contains("delete-row")){
@@ -390,13 +423,102 @@ document.addEventListener('DOMContentLoaded', function () {
         const btn = e.target;
         btn.closest('tr').remove();
 
-        // make user email available for the uer
-        userIsNowAvilable(email, "Email is available");
+        const formData = loadFormDataIntoAnObject();
+
+        const row = document.querySelectorAll('.data-table tbody td:nth-child(3)')
+        console.log(row);
+        console.log(row.length);
+
+        if(isEmailUnique(formData.email)){
+            // make user email available for the uer
+            userIsNowAvilable(email, "Email is available");
+            // if(row.length > 0){
+            //     // userIsNowAvilable(email, "Email is available");
+            // }
+
+        }
+
+
+         //Function to check if the email is unique
+         function isEmailUnique(emailValue) {
+            console.log("check")
+            // getting all email from the table
+
+            
+            //console.log(row)
+
+            const existingEmails = Array.from(row).map(td => td.textContent); // email ka array return kerke dy rha h
+            //console.log(existingEmails);
+            return !existingEmails.includes(emailValue);
+        }
+    }
+
+
+    // Edit User Detail functionality
+    const tbaleEL2 = document.querySelector('table');
+
+    tbaleEL2.addEventListener('click', onUpdate);
+
+    function onUpdate(e){
+        // Check if the clicked element has the class "edit-row"
+        if(!e.target.classList.contains("edit-row")){
+            return;
+        }
 
         
-
+        // getting tr element
+        const btn = e.target.closest('tr');
+        
+        // move data form table to form
+        moveDataFromTableToForm(btn);
     }
- 
+
+    function moveDataFromTableToForm(btn){
+
+        // disable password and confirm password 
+        const password = document.getElementById("password");
+        const cpassword = document.getElementById("cpassword");
+
+        password.disabled = true;
+        cpassword.disabled = true;
+
+
+        const firstChildData = btn.firstChild.textContent;
+        console.log(firstChildData);
+        const user = btn.children[1].textContent;
+        console.log("User :", user);
+        const email = btn.children[2].textContent;
+        console.log("Email: ", email);
+        const phone = btn.children[3].textContent;
+        console.log("Phone: ", phone);
+        const Subject = btn.children[4].textContent;
+        console.log("Subject: ", Subject );
+        const gender = btn.children[5].textContent;
+        console.log("Gender: ", gender);
+        const startDate = btn.children[6].textContent;
+        console.log("StartDate: ", startDate);
+        const endData = btn.children[6].textContent;
+        console.log("EndData: ", endData);
+
+        document.getElementById("username").value = user;
+        document.getElementById("email").value = email;
+        document.getElementById("phone").value = phone;
+        
+        // Set the selected option for the "subjects" select element
+        const subjectsSelect = document.getElementById("subjects");
+        for (let i = 0; i < subjectsSelect.options.length; i++) {
+            if (subjectsSelect.options[i].text === Subject) {
+                subjectsSelect.options[i].selected = true;
+                break;
+            }
+        }
+        // document.getElementById("male").value = user;
+        document.getElementById("startDate").value = startDate;
+        document.getElementById("endDate").value = endData
+    }
+
+    
+
     // function to make user is now Available for register
     function userIsNowAvilable(input, Message){
         const parentElement = input.parentElement;
@@ -405,6 +527,9 @@ document.addEventListener('DOMContentLoaded', function () {
         smallElement.innerText = Message
 
     }
+
+
+
     
     // Function to update the deleteCheckboxes NodeList
     function updateDeleteCheckboxes() {
@@ -415,7 +540,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const selectAllCheckbox = document.getElementById('selectAll');
     const deleteSelectedButton = document.querySelector('.delete-selected');
     let deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
+    
+    
     const deleteRowButtons = document.querySelectorAll('.delete-row');
+
+    
     
     // Event listener for "Select All" checkbox
     selectAllCheckbox.addEventListener('change', function () {
@@ -442,18 +571,35 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     
     // Event listener for individual row "Delete" buttons
-    deleteRowButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const row = button.closest('tr');
-            row.remove();
+    // deleteRowButtons.forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         const row = button.closest('tr');
+    //         row.remove();
             
-            const allChecked = [...deleteCheckboxes].every(checkbox => checkbox.checked);
-            selectAllCheckbox.checked = allChecked;
+    //         const allChecked = [...deleteCheckboxes].every(checkbox => checkbox.checked);
+    //         selectAllCheckbox.checked = allChecked;
     
-            // Update the NodeList after deleting a row
-            updateDeleteCheckboxes();
-        });
+    //         // Update the NodeList after deleting a row
+    //         updateDeleteCheckboxes();
+    //     });
+    // });
+
+
+
+    // Edit User Functionality
+
+    const editRow = document.querySelectorAll(".edit-row");
+    console.log(editRow);
+
+    editRow.forEach(button => {
+            button.addEventListener('click', function(){
+                console.log(button);
+                alert("clicked");
+
+                updateDeleteCheckboxes();
+            });
     });
+    
 
 
     // from reset functionality
@@ -495,6 +641,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+
+    
+   
+
     // delete all fucntionality
     deleteAllButton.addEventListener("click", deleteAllRows);
     
@@ -502,15 +652,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const askForDelete = prompt('Are you sure, you want to delete all')
 
-            if(askForDelete === "yes" || askForDelete === "YES" || askForDelete === "Yes"){
-                const tbody = document.querySelector('tbody');
-                tbody.innerHTML = "";
-                tfoot.style.visibility = "hidden"
+        if(askForDelete === "yes" || askForDelete === "YES" || askForDelete === "Yes"){
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = "";
+            tfoot.style.visibility = "hidden"
 
-                resetForm();
+            resetForm();
 
-            }
-            
         }
+            
+    }
+
+    
+    //     function editUpdateButton(){
+    //     // Update user data functionality
+    //     EditRow.forEach(button => {
+    //         button.addEventListener("click", editCurrentRow);
+
+    //     })
+    //     }
+    // function editCurrentRow(){
+    //     console.log("hdhjdhdhdhdhdh");
+    // }
+
+    // Sir ne edit kiya tha ye
+    // id="edit-row-${data.email}"
 
 });
