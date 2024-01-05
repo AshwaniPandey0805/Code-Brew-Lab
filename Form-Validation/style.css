@@ -13,12 +13,12 @@ body {
   }
 /* main container  */
 .container{
-    background-color: #fff;
+    background-color: rgba(190,218,232,255);
     border: 1px solid brown;
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 35%;
+    width: 32%;
     /* padding: 20px; */
     /* margin: 20px; */
     position: sticky;
@@ -34,7 +34,7 @@ body {
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 65%;
+    width: 68%;
     padding: 20px;
     margin: 20px;
     
@@ -81,7 +81,7 @@ h1{
 }
 
 .form-control label{
-    color: #777;
+    color: black;
     display: block;
     margin-bottom: 5px;
 }
@@ -130,6 +130,8 @@ h1{
 .form-control.successAvaialbe input{
     border-color: #23cc71;
 }
+
+/* Submit button */
 button[type=submit]{
     cursor: pointer;
     background-color: #3498db;
@@ -137,14 +139,35 @@ button[type=submit]{
     border-radius: 4px;
     font-size: 16px;
     color: #fff;
-    padding: 10px;
+    padding: 14px;
     display: block;
     width: 75%;
     margin: auto;
-    margin-bottom: 16px;
+    margin-bottom: 13px;
     text-transform: uppercase;
+    font-weight: 700;
 }
 
+/* Update Button */
+#update-btn{
+    cursor: pointer;
+    background-color: #23cc71;
+    border: 1px solid #23cc71;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    padding: 14px;
+    display: block;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
+    visibility: hidden; 
+    position: absolute;
+
+}
+/* Reset button */
 button[type=reset]{
     cursor: pointer;
     background-color: #e74c3e;
@@ -152,12 +175,13 @@ button[type=reset]{
     border-radius: 4px;
     font-size: 16px;
     color: #fff;
-    padding: 10px;
+    padding: 14px;
     display: block;
     width: 75%;
     margin: auto;
     margin-top: 10px;
     text-transform: uppercase;
+    font-weight: 700;
 
 }
 
