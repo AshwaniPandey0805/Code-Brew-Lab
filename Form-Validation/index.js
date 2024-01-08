@@ -30,6 +30,12 @@ document.addEventListener('DOMContentLoaded', function () {
     function onFormSubmit(e){
         e.preventDefault();
         const formData = loadFormDataIntoAnObject();
+        // if (isFormValid()) {
+        //     // Add data to the table
+        //     addDataToTable(formData);
+        //     // resetForm();
+        //     tfoot.style.visibility = "visible"
+        // }
         
         // Validate unique email in the form
         if (isEmailUnique(formData.email)) {
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Show error function
     function showError(input, Message){
         const parentElement = input.parentElement;
-        parentElement.className = 'form-control error';
+        parentElement.className = 'form-control1 error';
         const smallElement = parentElement.querySelector('small');
         smallElement.innerText = Message
 
@@ -109,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Show success function
     function showSuccess(input){
         const parentElement = input.parentElement;
-        parentElement.className = 'form-control success';
+        parentElement.className = 'form-control1 success';
     }
 
     // Validating Form Inputs
@@ -300,12 +306,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // for error-message for date
     function showErrorDate(inputContainer, errorElement, message) {
-        inputContainer.className = 'form-control error';
+        inputContainer.className = 'form-control1 error';
         errorElement.innerText = message;
     }
     // for success-message for date
     function showSuccessDate(inputContainer) {
-        inputContainer.className = 'form-control success';
+        inputContainer.className = 'form-control1 success';
     }
 
     // Adding data dynamically to the table
@@ -321,8 +327,11 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${data.gender}</td>
             <td>${data.startDate}</td>
             <td>${data.endDate}</td>
-            <td><button class="edit-row">Edit</button>
-                <button class="delete-row">Delete</button></td>`;
+            <td>
+            <button type="button" class="edit-row" id="myBtn">Edit</button>
+                <button class="delete-row">Delete</button>
+                
+            </td>`;
         tbody.appendChild(tr);
         // Update the NodeList after adding the new row
         updateDeleteCheckboxes();
@@ -384,74 +393,78 @@ document.addEventListener('DOMContentLoaded', function () {
         // getting tr element
         const selectedRow = e.target.closest('tr');
         selectedRow.classList.add('edit-row-selected');
-        // move data form table to form
-        moveDataFromTableToForm(selectedRow);
 
-        
+        // JQuery ----------------------------------- 
+        // modal
+        $("#myBtn").click(function(){
+            $("#myModal").modal("show");
+            console.log("Modal Clicked")
+            moveDataFromTableToForm(selectedRow);
+          });
+        //   $("#myModal").on('hidden.bs.modal', function(){
+        //     alert('The modal is now hidden.');
+        //   });
     }
-
-        
-
-        
 
     // function to move data table to form
     function moveDataFromTableToForm(btn){
-
+        console.log("Bhai call ho ja");
+        console.log(btn);
         //update button
-        const updateBtn = document.getElementById('update-btn');
+        //const updateBtn = document.getElementById('model-update-button');
 
         //making update button visible while pressing edit button
-        updateBtn.style.visibility = "visible";
-        updateBtn.style.position = "relative"
+        // updateBtn.style.visibility = "visible";
+        // updateBtn.style.position = "relative"
 
         // disable password and confirm password 
-        const password = document.getElementById("password");
-        const cpassword = document.getElementById("cpassword");
+        const updatePasswordBtn = document.getElementById("updatePassword");
+        const updateCPasswordBtn = document.getElementById("updateCPassword");
 
         //making submit button hidden
-        const submitBtn = document.getElementById("submit-btn");
-        submitBtn.style.visibility = "hidden";
-        submitBtn.style.position = "absolute"
-        password.disabled = true;
-        cpassword.disabled = true;
+        // const submitBtn = document.getElementById("submit-btn");
+        // submitBtn.style.visibility = "hidden";
+        // submitBtn.style.position = "absolute"
+        updatePasswordBtn.disabled = true;
+        updateCPasswordBtn.disabled = true;
 
         // importing data form table to form
-        const user = btn.children[1].textContent;
-        console.log("User :", user);
-        const email = btn.children[2].textContent;
-        console.log("Email: ", email);
-        const phone = btn.children[3].textContent;
-        console.log("Phone: ", phone);
-        const Subject = btn.children[4].textContent;
-        console.log("Subject: ", Subject );
-        const gender = btn.children[5].textContent;
-        console.log("Gender: ", gender);
-        const startDate = btn.children[6].textContent;
-        console.log("StartDate: ", startDate);
-        const endData = btn.children[6].textContent;
-        console.log("EndData: ", endData);
+        const toUpdateUser = btn.children[1].textContent;
+        console.log("User :", toUpdateUser);
+        const toUpdateEmail = btn.children[2].textContent;
+        console.log("Email: ", toUpdateEmail);
+        const toUpdatePhone = btn.children[3].textContent;
+        console.log("Phone: ", toUpdatePhone);
+        const toUpdateSubject = btn.children[4].textContent;
+        console.log("Subject: ", toUpdateSubject );
+        const toUpdateGender = btn.children[5].textContent;
+        console.log("Gender: ", toUpdateGender);
+        const toUpdateStartDate = btn.children[6].textContent;
+        console.log("StartDate: ", toUpdateStartDate);
+        const toUpdateEndData = btn.children[6].textContent;
+        console.log("EndData: ", toUpdateEndData);
 
         // sending data to the form
-        document.getElementById("username").value = user;
-        document.getElementById("email").value = email;
-        document.getElementById("phone").value = phone;
+        document.getElementById("updateUsername").value = toUpdateUser;
+        document.getElementById("updateEmail").value = toUpdateEmail;
+        document.getElementById("updatePhone").value = toUpdatePhone;
         
         // Set the selected option for the "subjects" select element
-        const subjectsSelect = document.getElementById("subjects");
+        const subjectsSelect = document.getElementById("updateSubject");
         for (let i = 0; i < subjectsSelect.options.length; i++) {
-            if (subjectsSelect.options[i].text === Subject) {
+            if (subjectsSelect.options[i].text === toUpdateSubject) {
                 subjectsSelect.options[i].selected = true;
                 break;
             }
         }
         // document.getElementById("male").value = user;
-        document.getElementById("startDate").value = startDate;
-        document.getElementById("endDate").value = endData
+        document.getElementById("updateStartDate").value = toUpdateStartDate;
+        document.getElementById("updateEndDate").value = toUpdateEndData
 
     }
     
     // Update button add eventListner
-    const updatebtn = document.getElementById("update-btn");
+    const updatebtn = document.getElementById("model-update-button");
     
     updatebtn.addEventListener("click", updateUserDetail);
     function updateUserDetail(e){
@@ -465,24 +478,19 @@ document.addEventListener('DOMContentLoaded', function () {
         resetForm();
 
 
-        // make update button hidde 
-        updatebtn.style.visibility = "hidden";
-        updatebtn.style.position = "absolute"
+        // // make update button hidde 
+        // updatebtn.style.visibility = "hidden";
+        // updatebtn.style.position = "absolute"
 
 
         //making submit button visible
-        const submitBtn = document.getElementById("submit-btn");
-        submitBtn.style.visibility = "visible";
-        submitBtn.style.position = "relative"
+        // const submitBtn = document.getElementById("submit-btn");
+        // submitBtn.style.visibility = "visible";
+        // submitBtn.style.position = "relative"
 
         // make password and confirm paswword enable
-        password.disabled = false;
-        cpassword.disabled = false;
-
-        
-        
-       
-
+        // password.disabled = false;
+        // cpassword.disabled = false;
     }
 
     // Function to get the selected row
@@ -492,12 +500,12 @@ document.addEventListener('DOMContentLoaded', function () {
     
      // updating user data field
     function updateUserDataField(){
-        const updatedUserName = document.getElementById('username').value;
-        const updatedEmail = document.getElementById('email').value;
-        const updatedPhoneNumber = document.getElementById('phone').value;
-        const updatedSubject = document.getElementById('subjects').value;
-        const updatedStartDate = document.getElementById('startDate').value;
-        const updatedEndDate = document.getElementById('endDate').value;
+        const updatedUserName = document.getElementById('updateUsername').value;
+        const updatedEmail = document.getElementById('updateEmail').value;
+        const updatedPhoneNumber = document.getElementById('updatePhone').value;
+        const updatedSubject = document.getElementById('updateSubject').value;
+        const updatedStartDate = document.getElementById('updateStartDate').value;
+        const updatedEndDate = document.getElementById('updateEndDate').value;
 
         const updatedFormData = {
             updatedUserName : updatedUserName,
@@ -532,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // function to make user is now Available for register
     function userIsNowAvilable(input, Message){
         const parentElement = input.parentElement;
-        parentElement.className = 'form-control successAvaialbe';
+        parentElement.className = 'form-control1 successAvaialbe';
         const smallElement = parentElement.querySelector('small');
         smallElement.innerText = Message
 
@@ -622,15 +630,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
         genderContainer.className = 'form-control2';
         genderError.innerText = "";
-        startDateContainer.className = 'form-control';
-        endDateContainer.className = 'form-control';
+        startDateContainer.className = 'form-control1';
+        endDateContainer.className = 'form-control1';
     
         // Additional fields can be added in a similar manner
     }
 
     function resetField(inputField, ...additionalContainers) {
         // Reset individual field
-        inputField.parentElement.className = 'form-control';
+        inputField.parentElement.className = 'form-control1';
         const smallElement = inputField.parentElement.querySelector('small');
         if (smallElement) {
             smallElement.innerText = "";
@@ -638,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Reset additional containers if provided
         additionalContainers.forEach(container => {
-            container.className = 'form-control';
+            container.className = 'form-control1';
             const errorElement = container.querySelector('small');
             if (errorElement) {
                 errorElement.innerText = "";
@@ -682,7 +690,7 @@ document.addEventListener('DOMContentLoaded', function () {
             
     }
 
-    
+    // -----------------------------------------------------------------------------------------
     //     function editUpdateButton(){
     //     // Update user data functionality
     //     EditRow.forEach(button => {
@@ -697,4 +705,31 @@ document.addEventListener('DOMContentLoaded', function () {
     // Sir ne edit kiya tha ye
     // id="edit-row-${data.email}"
 
+    //---------------------------------------------------------------------------------------
+
+    // Modal Functionality
+    // var myBtn = document.getElementById("myBtn");
+    // var myModal = document.getElementById("exampleModal");
+  
+    // myBtn.addEventListener("click", function() {
+    //   myModal.classList.add("show");
+    //   myModal.style.display = "block";
+    // });
+  
+    // var closeBtns = document.querySelectorAll(".close, .btn-danger");
+    // closeBtns.forEach(function(btn) {
+    //   btn.addEventListener("click", function() {
+    //     myModal.classList.remove("show");
+    //     myModal.style.display = "none";
+    //   });
+    // });
+
+    // modal script
+    // $("#myBtn").click(function(){
+    //     $("#myModal").modal("show");
+    //     console.log("Modal Clicked")
+    //   });
+    //   $("#myModal").on('hidden.bs.modal', function(){
+    //     alert('The modal is now hidden.');
+    //   });
 });

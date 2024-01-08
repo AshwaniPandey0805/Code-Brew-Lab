@@ -12,33 +12,30 @@ body {
     margin: 0;
   }
 /* main container  */
-.container{
+/* .container{
     background-color: rgba(190,218,232,255);
     border: 1px solid brown;
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 32%;
-    /* padding: 20px; */
-    /* margin: 20px; */
+    width: 40%;
+    padding: 20px;
+    margin: 20px;
     position: sticky;
     top: 20px;
     bottom: 0px;
-    
-    
-    
-}
-.list-container{
+} */
+/* .list-container{
     background-color: #fff;
     border: 1px solid brown;
     color: black;
     border-radius: 5px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.9);
-    width: 68%;
+    width: 60%;
     padding: 20px;
     margin: 20px;
     
-}
+} */
 
 .main-content{
     display: flex;
@@ -70,24 +67,25 @@ h1{
 }
 
 
-.form{
+.form1{
     padding: 20px 40px;
+    /* width: 100%; */
 }
 
-.form-control{
+.form-control1{
     margin-bottom: 10px;
     padding-bottom: 20px;
     position: relative;
 }
 
-.form-control label{
+.form-control1 label{
     color: black;
     display: block;
     margin-bottom: 5px;
 }
 
-.form-control input{
-    border: 2px solid #f0f0f0;
+.form-control1 input{
+    border: 2px solid rgba(0,0,0,0.55);
     border-radius: 4px;
     display: block;
     width: 100%;
@@ -96,21 +94,21 @@ h1{
     margin-bottom: 4px;
 }
 
-.form-control input:focus{
+.form-control1 input:focus{
     outline: 0;
     border-color: #777;
 }
 
 /* add success class wti input field */
-.form-control.success input{
+.form-control1.success input{
     border-color: #23cc71;
 }
 
-.form-control.error input{
+.form-control1.error input{
     border-color: #e74c3e;
 }
 
-.form-control small{
+.form-control1 small{
     color: #e74c3e;
     position: absolute;
     bottom: 0;
@@ -118,16 +116,16 @@ h1{
     visibility: hidden;
 }
 
-.form-control.error small{
+.form-control1.error small{
     visibility: visible;
 }
 
-.form-control.successAvaialbe small{
+.form-control1.successAvaialbe small{
     visibility: visible;
     color: #23cc71;
     
 }
-.form-control.successAvaialbe input{
+.form-control1.successAvaialbe input{
     border-color: #23cc71;
 }
 
@@ -149,7 +147,7 @@ button[type=submit]{
 }
 
 /* Update Button */
-#update-btn{
+/* #update-btn{
     cursor: pointer;
     background-color: #23cc71;
     border: 1px solid #23cc71;
@@ -166,7 +164,7 @@ button[type=submit]{
     visibility: hidden; 
     position: absolute;
 
-}
+} */
 /* Reset button */
 button[type=reset]{
     cursor: pointer;
@@ -244,6 +242,7 @@ td {
 /* Add border to cells and header */
 th, td {
     border: 1px solid #ddd; /* Light gray border */
+    text-align: center;
 }
 
 /* Hover effect for better interactivity */
@@ -264,6 +263,7 @@ tbody tr:hover {
     width: 100%;
     margin: 2px;
     color: white;
+    cursor: pointer;
 }
 
 
@@ -276,6 +276,7 @@ tbody tr:hover {
     width: 100%;
     margin: 2px;
     color: white;
+    cursor: pointer;
 }
 
 
@@ -332,7 +333,14 @@ tbody tr:hover {
     margin: 4px;
     width: 300px;
     text-transform: uppercase;
+    cursor: pointer;
 
+}
+.delete-selected:hover{
+    background-color: #f37e73;
+}
+.delete-all:hover{
+    background-color: #f37e73;
 }
 
 .tfoot{
@@ -341,5 +349,21 @@ tbody tr:hover {
     align-items: center;
     visibility: hidden;
 
+}
+
+#model-update-button{
+    cursor: pointer;
+    background-color: #23cc71;
+    border: 1px solid #23cc71;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    padding: 14px;
+    display: block;
+    width: 75%;
+    margin: auto;
+    margin-bottom: 13px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 

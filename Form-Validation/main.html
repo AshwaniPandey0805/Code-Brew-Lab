@@ -1,45 +1,78 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Validation</title>
+    
     <link rel="stylesheet" href="style.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>    
+    
+    <style>
+        .container {
+            background-color: rgba(190, 218, 232, 255);
+            border: 1px solid brown;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            width: 40%;
+            
+            padding: 20px;
+            position: sticky ;
+            top: 0px;
+            bottom: 0px;
+        }
+
+        .list-container {
+            background-color: #fff;
+            border: 1px solid brown;
+            color: black;
+            border-radius: 5px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
+            width: 60%; 
+            margin: 0px 10px 10px 10px;
+            padding: 20px;
+        }
+    </style>
+    
 </head>
-<body>
+<body style="background-color: rgba(0,0,0,0.78) ;" >
     <div class="container">
-        <form id="form" class="form">
+        <form id="form" class="form1">
             <h1>Registration With Us 💻</h1>
             <div class="main-content">
                 <div class="left">
-                    <div class="form-control ">
+                    <div class="form-control1 ">
                         <label for="username">Username:</label>
                         <input type="text" id="username"  placeholder="Enter Username">
                         <small>Error Message Will Displayed Here</small>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control1">
                         <label for="email">Email:</label>
                         <input type="text" id="email" placeholder="Enter Email">
                         <small>Error Message Will Displayed</small>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control1">
                         <label for="phone">Phone Number:</label>
                         <input type="text" id="phone" placeholder="Enter Phone Number">
                         <small>Error Message Will Displayed</small>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control1">
                         <label for="password">Password:</label>
                         <input type="password" id="password">
                         <small>Error Message Will Displayed</small>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control1">
                         <label for="cpassword">Confirm Password:</label>
                         <input type="password" id="cpassword" >
                         <small>Error Message Will Displayed</small>
                     </div>
                 </div>
                 <div class="right">
-                    <div class="form-control">
+                    <div class="form-control1">
                         <label for="subject">Select Subject</label>
                         <select name="subject" id="subjects">
                             <option value="">Select</option>
@@ -64,13 +97,13 @@
                         </div>
                         <small id="genderError">Please select a gender</small>
                     </div>
-                    <div class="form-control" id="startDateContainer">
+                    <div class="form-control1" id="startDateContainer">
                         <label for="startDate">Start Date</label>
                         <input type="date" id="startDate" name="startDate">
                         <small id="startDateError">Please select a start date</small>
                     </div>
                     
-                    <div class="form-control" id="endDateContainer">
+                    <div class="form-control1" id="endDateContainer">
                         <label for="endDate">End Date</label>
                         <input type="date" id="endDate" name="endDate">
                         <small id="endDateError">Please select an end date</small>
@@ -78,9 +111,9 @@
                 </div>
             </div>
             <button type="submit" id="submit-btn">Submit</button>
-            <div>
+            <!-- <div>
                 <button id="update-btn" >Update</button>
-            </div>
+            </div> -->
             <button type="reset" >Reset</button>
         </form>
             <!-- <div>
@@ -117,11 +150,124 @@
                 </th>
             </tfoot>
         </table>
+
+        <!-- Button trigger modal -->
+        <!-- <button type="button" class="btn btn-info btn-lg" id="myBtn">Open Modal</button> -->
+        
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+            
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form" class="form1">
+                        <h1>Registration With Us 💻</h1>
+                        <div class="main-content">
+                            <div class="left">
+                                <div class="form-control1 ">
+                                    <label for="updateUsername">Username:</label>
+                                    <input type="text" id="updateUsername"  placeholder="Enter Username">
+                                    <small>Error Message Will Displayed Here</small>
+                                </div>
+                                <div class="form-control1">
+                                    <label for="updateEmail">Email:</label>
+                                    <input type="text" id="updateEmail" placeholder="Enter Email">
+                                    <small>Error Message Will Displayed</small>
+                                </div>
+                                <div class="form-control1">
+                                    <label for="updatePhone">Phone Number:</label>
+                                    <input type="text" id="updatePhone" placeholder="Enter Phone Number">
+                                    <small>Error Message Will Displayed</small>
+                                </div>
+                                <div class="form-control1">
+                                    <label for="updatePassword">Password:</label>
+                                    <input type="password" id="updatePassword">
+                                    <small>Error Message Will Displayed</small>
+                                </div>
+                                <div class="form-control1">
+                                    <label for="updateCPassword">Confirm Password:</label>
+                                    <input type="password" id="updateCPassword" >
+                                    <small>Error Message Will Displayed</small>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="form-control1">
+                                    <label for="updateSubject">Select Subject</label>
+                                    <select name="subject" id="updateSubject">
+                                        <option value="">Select</option>
+                                        <option value="Math">Math</option>
+                                        <option value="English">English</option>
+                                        <option value="Science">Science</option>
+                                        <option value="Hindi">Hindi</option>
+                                    </select>
+                                    <small>Please select a subject</small>
+                                </div>
+                               
+                                <div class="form-control2" id="genderContainer">
+                                    <label for="gender">Gender</label>
+                                    <div class="gender-div">
+                                        <label for="male">Male</label>
+                                        <input type="radio" id="male" name="gender" value="Male">
+                                    
+                                        <label for="female">Female</label>
+                                        <input type="radio" id="female" name="gender" value="Female">
+                                    
+                                        
+                                    </div>
+                                    <small id="genderError">Please select a gender</small>
+                                </div>
+                                <div class="form-control1" id="startDateContainer">
+                                    <label for="updateStartDate">Start Date</label>
+                                    <input type="date" id="updateStartDate" name="startDate">
+                                    <small id="startDateError">Please select a start date</small>
+                                </div>
+                                
+                                <div class="form-control1" id="endDateContainer">
+                                    <label for="updateEndDate">End Date</label>
+                                    <input type="date" id="updateEndDate" name="endDate">
+                                    <small id="endDateError">Please select an end date</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <button id="model-update-button" data-dismiss="modal" >Update</button>
+                        <button type="reset" >Reset</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+                    
+            </div>
+          </div> 
+       
+
+        
         
             
 
     </div>
     
+    
+   
     <script src="index.js" ></script>
+    <!-- <script>
+        $(document).ready(function(){
+          $("#myBtn").click(function(){
+            $("#myModal").modal("show");
+            console.log("Modal Clicked")
+          });
+          $("#myModal").on('hidden.bs.modal', function(){
+            alert('The modal is now hidden.');
+          });
+        });
+        </script> -->
 </body>
 </html>
