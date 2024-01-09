@@ -367,3 +367,23 @@ tbody tr:hover {
     font-weight: 700;
 }
 
+#cancel-btn{
+    padding: 4px;
+    background-color: #e74c3e;
+    border-color: #e74c3e;
+    border: 1px solid #e74c3e;
+    border-radius: 4px;
+    color: white;
+    font-weight: 200;
+    opacity: 1;
+    margin-top: 1px;
+}
+
+.apply-filter th input{
+    color:black;
+    font-weight: 200;
+
+}
+
+
+
