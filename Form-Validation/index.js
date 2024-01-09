@@ -31,31 +31,38 @@ document.addEventListener('DOMContentLoaded', function () {
     function onFormSubmit(e){
         e.preventDefault();
         const formData = loadFormDataIntoAnObject();
+
+        if (isFormValid()) {
+            // Add data to the table
+            addDataToTable(formData);
+            //resetForm();
+            tfoot.style.visibility = "visible"
+        }
         
         
         //Validate unique email in the form
-            if (isEmailUnique(formData.email)) {
-                // Validate unique number form data
-                if( isNumberUnique(formData.phoneNumber)){
-                        //vakidate form
-                    if (isFormValid()) {
-                        // Add data to the table
-                        addDataToTable(formData);
-                        resetForm();
-                        tfoot.style.visibility = "visible"
-                    }
-                }else{
-                const phoneNumber = document.getElementById("phone");
-                showError(phoneNumber, "Phone number already exits");
+            // if (isEmailUnique(formData.email)) {
+            //     // Validate unique number form data
+            //     if( isNumberUnique(formData.phoneNumber)){
+            //             //vakidate form
+            //         if (isFormValid()) {
+            //             // Add data to the table
+            //             addDataToTable(formData);
+            //             resetForm();
+            //             tfoot.style.visibility = "visible"
+            //         }
+            //     }else{
+            //     const phoneNumber = document.getElementById("phone");
+            //     showError(phoneNumber, "Phone number already exits");
 
-                }
-            } 
-            else {
-            // Show error if email already exists
-                const email = document.getElementById("email");
-                showError(email, "Email already exits")
+            //     }
+            // } 
+            // else {
+            // // Show error if email already exists
+            //     const email = document.getElementById("email");
+            //     showError(email, "Email already exits")
         
-            }
+            // }
     }
     // function to load form data to an object
     function loadFormDataIntoAnObject(){
@@ -519,5 +526,30 @@ document.addEventListener('DOMContentLoaded', function () {
             cpassword.disabled = false;
             resetForm();
         }
+    }
+
+    // Add event listeners for filter input fields
+    const filterUsernameInput = document.getElementById("filterUsername");
+    const filterEmailInput = document.getElementById("filterEmail");
+    const filterPhoneNumber = document.getElementById("filterPhoneNumber")
+    filterEmailInput.addEventListener('input', filterTable);
+    filterUsernameInput.addEventListener('input', filterTable);
+    filterPhoneNumber.addEventListener("input", filterTable);
+    function filterTable(){
+        const filterUsername = filterUsernameInput.value.toLowerCase();
+        const filterEmail = filterEmailInput.value.toLowerCase();
+        const filterPhoneNumberValue = filterPhoneNumber.value;
+        const rows = document.querySelectorAll('.data-table tbody tr');
+        rows.forEach(row => {
+            const username = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+            const email = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+            const phoneNumber = row.querySelector('td:nth-child(4)').textContent;
+
+            if (username.includes(filterUsername) && email.includes(filterEmail) && phoneNumber.includes(filterPhoneNumberValue) ) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
     }
 });
