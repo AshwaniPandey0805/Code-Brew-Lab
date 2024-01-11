@@ -18,7 +18,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const resetButton = document.querySelector('button[type="reset"]');
     const deleteAllButton = document.querySelector(".delete-all")
     const tfoot = document.querySelector(".tfoot");
-
+    const selectAllCheckbox = document.getElementById('selectAll');
+    const deleteSelectedButton = document.querySelector('.delete-selected');
+    let deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
+    // -------------------------------------------------------------
+    const deleteRowButtons = document.querySelectorAll('.delete-row');
+    // ---------------------------------------------------------
+    
+    // startdate EventListner
     startDate.addEventListener('input', function () {
         endDate.min = startDate.value;
     });
@@ -32,37 +39,37 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const formData = loadFormDataIntoAnObject();
 
-        if (isFormValid()) {
-            // Add data to the table
-            addDataToTable(formData);
-            //resetForm();
-            tfoot.style.visibility = "visible"
-        }
+        // if (isFormValid()) {
+        //     // Add data to the table
+        //     addDataToTable(formData);
+        //     //resetForm();
+        //     tfoot.style.visibility = "visible"
+        // }
         
         
         //Validate unique email in the form
-            // if (isEmailUnique(formData.email)) {
-            //     // Validate unique number form data
-            //     if( isNumberUnique(formData.phoneNumber)){
-            //             //vakidate form
-            //         if (isFormValid()) {
-            //             // Add data to the table
-            //             addDataToTable(formData);
-            //             resetForm();
-            //             tfoot.style.visibility = "visible"
-            //         }
-            //     }else{
-            //     const phoneNumber = document.getElementById("phone");
-            //     showError(phoneNumber, "Phone number already exits");
+            if (isEmailUnique(formData.email)) {
+                // Validate unique number form data
+                if( isNumberUnique(formData.phoneNumber)){
+                        //vakidate form
+                    if (isFormValid()) {
+                        // Add data to the table
+                        addDataToTable(formData);
+                        resetForm();
+                        tfoot.style.visibility = "visible"
+                    }
+                }else{
+                const phoneNumber = document.getElementById("phone");
+                showError(phoneNumber, "Phone number already exits");
 
-            //     }
-            // } 
-            // else {
-            // // Show error if email already exists
-            //     const email = document.getElementById("email");
-            //     showError(email, "Email already exits")
+                }
+            } 
+            else {
+            // Show error if email already exists
+                const email = document.getElementById("email");
+                showError(email, "Email already exits")
         
-            // }
+            }
     }
     // function to load form data to an object
     function loadFormDataIntoAnObject(){
@@ -79,12 +86,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         return formData;
     }
+
      //Function to check if the email is unique
     function isEmailUnique(emailValue) {
         const row = document.querySelectorAll('.data-table tbody td:nth-child(3)')
          const existingEmails = Array.from(row).map(td => td.textContent); // email ka array return kerke dy rha h
         return !existingEmails.includes(emailValue);
     }
+
     //Function to check if the number is unique
     function isNumberUnique(number) {
         const row = document.querySelectorAll('.data-table tbody td:nth-child(4)')
@@ -100,11 +109,13 @@ document.addEventListener('DOMContentLoaded', function () {
         smallElement.innerText = Message
 
     }
+
     // Show success function
     function showSuccess(input){
         const parentElement = input.parentElement;
         parentElement.className = 'form-control1 success';
     }
+
     // Validating Form Inputs
     function isFormValid(){
         validateUsername();
@@ -118,6 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const errorElements = document.querySelectorAll('.error');
         return errorElements.length === 0;
     }
+
     // Array of Object
     let userDataArray = [];
     function addDataToTable(data) {
@@ -135,14 +147,20 @@ document.addEventListener('DOMContentLoaded', function () {
             <td>${data.startDate}</td>
             <td>${data.endDate}</td>
             <td>
-            <button type="button" class="edit-row" id="myBtn">Edit</button>
+                <button type="button" class="edit-row" onclick="onclick(this.parentNode.parentNode)">Edit</button>
                 <button class="delete-row">Delete</button>
-                
-            </td>`;
+            </td> `;
+
         tbody.appendChild(tr);
+
         // Update the NodeList after adding the new row
         updateDeleteCheckboxes();
     }
+
+    function onclick(ele){
+        console.log("Sb thik hai, Jamilwa gandu");
+    }
+    
 
 
      // Validating Form Inputs
@@ -152,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const errorElements = document.querySelectorAll('.error');
         return errorElements.length === 0;
     }
+
     // username
     username.addEventListener('input', validateUsername)
     function validateUsername(){
@@ -190,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(updatedUserName)
         }
     }
+
     // Email Validation
     email.addEventListener('input', validateEmail);
     function validateEmail(){
@@ -205,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(email);
         }
     }
+
     // update input Email Validation
     const updatedEmail = document.getElementById('updateEmail');
     updatedEmail.addEventListener('input', validateUpdatedEmail);
@@ -221,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(updatedEmail);
         }
     }
+
     // Validate Phone number
     phoneNumber.addEventListener('input', validatePhoneNumber);
     function validatePhoneNumber(){
@@ -234,6 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(phoneNumber);
         }
     }
+
     //validate password
     password.addEventListener('input', validatePassword);
     function validatePassword(){
@@ -254,6 +277,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(password);
         }
     }
+
     // Validate confirm passowrd
     cpassword.addEventListener("input", validateConfirmPassword);
     function validateConfirmPassword(){
@@ -267,6 +291,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(cpassword);
         }
     }
+
     // Subject Validation
     function validateSubject() {
         const subjectValue = subject.value;
@@ -276,6 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccess(subject);
         }
     }
+
     // validate Gender
     function validateGender() {
         const selectedGender = Array.from(genderRadios).some(radio => radio.checked);
@@ -285,6 +311,7 @@ document.addEventListener('DOMContentLoaded', function () {
             showSuccessGender(genderContainer);
         }
     }
+
     // Function to showErrorGender
     function showErrorGender(inputContainer, errorElement, message) {
         inputContainer.className = 'form-control2 error';
@@ -293,6 +320,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function showSuccessGender(inputContainer) {
         inputContainer.className = 'form-control2 success';
     }
+
     // validate date
     function validateDates() {
         const startDateValue = startDate.value;
@@ -318,17 +346,21 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+
      // for error-message for date
     function showErrorDate(inputContainer, errorElement, message) {
         inputContainer.className = 'form-control1 error';
         errorElement.innerText = message;
     }
+
     // for success-message for date
     function showSuccessDate(inputContainer) {
         inputContainer.className = 'form-control1 success';
     }
+
     // EventListner to remove particular row
     const tableEl1 = document.querySelector('table');
+
     tableEl1.addEventListener('click', onDeleteRow);
     function onDeleteRow(e){
         if(!e.target.classList.contains("delete-row")){
@@ -346,30 +378,43 @@ document.addEventListener('DOMContentLoaded', function () {
         return !existingEmails.includes(emailValue);
         }
     }
+
     // Edit User Detail functionality
     const tbaleEL2 = document.querySelector('table');
+
     tbaleEL2.addEventListener('click', onUpdate);
     function onUpdate(e){
         if(!e.target.classList.contains("edit-row")){
             return;
         }
+
         const allRows = document.querySelectorAll('.data-table tbody tr');
+    
         allRows.forEach(row => {
             row.classList.remove('edit-row-selected');
-        });
+        }); 
         const selectedRow = e.target.closest('tr');
         selectedRow.classList.add('edit-row-selected');
-        // Modal
-        $("#myBtn").click(function(){
-            $("#myModal").modal("show");
-            moveDataFromTableToForm(selectedRow);
-          });
+        
+        // calling  Modal on clicking edit button
+        $("#myModal").modal("show");
+        moveDataFromTableToForm(selectedRow);
+        
     }
+
+    
+
+    //function to move data from the table
     function moveDataFromTableToForm(btn){
+       // console.log(btn);
+
         const updatePasswordBtn = document.getElementById("updatePassword");
         const updateCPasswordBtn = document.getElementById("updateCPassword");
+        
+        // make password and confirm paswword disable
         updatePasswordBtn.disabled = true;
         updateCPasswordBtn.disabled = true;
+
         // importing data form table to form
         const toUpdateUser = btn.children[1].textContent;
         const toUpdateEmail = btn.children[2].textContent;
@@ -378,6 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const toUpdateGender = btn.children[5].textContent;
         const toUpdateStartDate = btn.children[6].textContent;
         const toUpdateEndData = btn.children[6].textContent;
+
         // sending data to the form
         document.getElementById("updateUsername").value = toUpdateUser;
         document.getElementById("updateEmail").value = toUpdateEmail;
@@ -392,23 +438,39 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         document.getElementById("updateStartDate").value = toUpdateStartDate;
         document.getElementById("updateEndDate").value = toUpdateEndData
+
+        
     }
+
+
     // Update button add eventListner
     const updatebtn = document.getElementById("model-update-button");
     updatebtn.addEventListener("click", updateUserDetail);
-    function updateUserDetail(e){
-        e.preventDefault();
+    function updateUserDetail(){
+        // getting selected row form the table with particular className
         const selectedRow2 = getSelectedRow();
+        //console.log(typeof selectedRow2);
+        console.log(selectedRow2);
+        
+
+        // geeting updated data as an object form the modal box
         const updatedUserDetailObject = updateUserDataField();
-        if(isModalFormValid()){
-            updateRowWithData(selectedRow2, updatedUserDetailObject);
-            resetForm();
-        }
+
+        updateRowWithData(selectedRow2, updatedUserDetailObject);
+
+        
+            
+        // after update the form reset the main form
+        resetForm();
+        
     }
+
+
     // Function to get the selected row
     function getSelectedRow() {
         return document.querySelector('.edit-row-selected');
     }
+
     // updating user data field
     function updateUserDataField(){
         const updatedUserName = document.getElementById('updateUsername').value;
@@ -417,6 +479,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const updatedSubject = document.getElementById('updateSubject').value;
         const updatedStartDate = document.getElementById('updateStartDate').value;
         const updatedEndDate = document.getElementById('updateEndDate').value;
+
+        // storing updated data into an object
         const updatedFormData = {
             updatedUserName : updatedUserName,
             updatedEmail : updatedEmail,
@@ -426,9 +490,11 @@ document.addEventListener('DOMContentLoaded', function () {
             updatedStartDate : updatedStartDate,
             updatedEndDate : updatedEndDate,
         }
+
         return updatedFormData;
     }
 
+    // function to update the selected row fomr the table with particular
     function updateRowWithData(row, data) {
         const cells = row.querySelectorAll('td');
         cells[1].textContent= data.updatedUserName;
@@ -440,21 +506,21 @@ document.addEventListener('DOMContentLoaded', function () {
         cells[7].textContent = data.updatedEndDate;
     }
 
+    // function to show that user is now avaialbe while deleting exitisng user detail
     function userIsNowAvilable(input, Message){
         const parentElement = input.parentElement;
         parentElement.className = 'form-control1 successAvaialbe';
         const smallElement = parentElement.querySelector('small');
         smallElement.innerText = Message
     }
+
+    // Delete Functionality 
+    
     function updateDeleteCheckboxes() {
         deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
     }
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const deleteSelectedButton = document.querySelector('.delete-selected');
-    let deleteCheckboxes = document.querySelectorAll('.delete-checkbox');
-    // -------------------------------------------------------------
-    const deleteRowButtons = document.querySelectorAll('.delete-row');
-    // ---------------------------------------------------------
+    
+
     // Event listener for "Select All" checkbox
     selectAllCheckbox.addEventListener('change', function () {
         const isChecked = selectAllCheckbox.checked;
@@ -478,6 +544,8 @@ document.addEventListener('DOMContentLoaded', function () {
         // Update the NodeList after deleting rows
         updateDeleteCheckboxes();
     });
+
+
     // from reset functionality
     function resetForm() {
         form.reset();
@@ -492,6 +560,8 @@ document.addEventListener('DOMContentLoaded', function () {
         startDateContainer.className = 'form-control1';
         endDateContainer.className = 'form-control1';
     }
+
+    // function to reset all fields
     function resetField(inputField, ...additionalContainers) {
         inputField.parentElement.className = 'form-control1';
         const smallElement = inputField.parentElement.querySelector('small');
@@ -506,6 +576,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     }
+
     // delete all fucntionality
     deleteAllButton.addEventListener("click", deleteAllRows);
     function deleteAllRows(){
@@ -514,16 +585,21 @@ document.addEventListener('DOMContentLoaded', function () {
             const tbody = document.querySelector('tbody');
             tbody.innerHTML = "";
             tfoot.style.visibility = "hidden"
+
             // make update button hidde 
             updatebtn.style.visibility = "hidden";
             updatebtn.style.position = "absolute"
+
             //making submit button visible
             const submitBtn = document.getElementById("submit-btn");
             submitBtn.style.visibility = "visible";
             submitBtn.style.position = "relative"
+
             // make password and confirm paswword enable
             password.disabled = false;
             cpassword.disabled = false;
+
+            // reset
             resetForm();
         }
     }
@@ -559,85 +635,44 @@ document.addEventListener('DOMContentLoaded', function () {
             if (username.includes(filterUsername) && email.includes(filterEmail) && phoneNumber.includes(filterPhoneNumberValue) && subject.includes(filterSubjectValue) && gender.includes(filterGenderValue)){
                 row.style.display = "";
             } else {
-                row.style.display = "none";
+                row.style.display = "none"; 
             }
         });
     }
 
+    const edit = document.querySelector("edit-row");
+    edit.addEventListener("click", ()=>{
+        console.log("Sb thik jamilwa");
+    })
 
-//     const filtname= document.querySelector(".filtname");
-//   console.log(filtname);
-//   const filtusers= document.querySelector(".filtusers");
-//   const filtdob= document.querySelector(".filtdob");
-//   const filtstartdate= document.querySelector(".filtstartdate");
-//   const filtenddate= document.querySelector(".filtenddate");
+    // addDataToTable(data) {
+    
+    //     var tr = document.createElement("tr");
 
-//   filtname.addEventListener("input",applyFilters);
-//   filtusers.addEventListener("input",applyFilters);
-//   filtdob.addEventListener("input",applyFilters);
-//   filtstartdate.addEventListener("input",applyFilters);
-//   filtenddate.addEventListener("input",applyFilters);
+    //     const td1  = tr.appendChild(document.createElement("td"));
+    //     const td2  = tr.appendChild(document.createElement("td"));
+    //     const td3  = tr.appendChild(document.createElement("td"));
+    //     const td4  = tr.appendChild(document.createElement("td"));
+    //     const td5  = tr.appendChild(document.createElement("td"));
+    //     const td6  = tr.appendChild(document.createElement("td"));
+    //     const td7  = tr.appendChild(document.createElement("td"));
+    //     const td8  = tr.appendChild(document.createElement("td"));
+    //     const td9  = tr.appendChild(document.createElement("td"));
+    //     
+    //     
+    //
+    //     td1.innerHTML  = '<input type="checkbox" class="delete-checkbox">';
+    //     td2.innerHTML  = data.username;
+    //     td3.innerHTML  = data.email;
+    //     td4.innerHTML  = data.phoneNumber;
+    //     td5.innerHTML  = data.subjects;
+    //     td6.innerHTML  = data.gender;
+    //     td7.innerHTML  = data.startDate;
+    //     td8.innerHTML  = data.endDate;
+    //     td9.innerHTML  = 
+    //    `<button type='button' id="+id+"  class='delete-row' >Delete</button>
+    //     <button type='button' id="+id+"  class='edit'  >EDIT</button>`;
 
-//     function applyFilters()
-//     {
-//         const filtnameinput=filtname.value.toLowerCase();
-//         const filtusersinput=filtusers.value.toLowerCase();
-//         const filtdobinput= filtdob.value;
-//         const filtstartdateinput=filtstartdate.value;
-//         const filtenddateinput=filtenddate.value;
-//         const rows=[];
-//         idArray.forEach(id=> rows.push(document.getElementById(id)));
-//         console.log(rows);
-//         rows.forEach(rows=>{
-//             const name = rows.childNodes[1].textContent.toLowerCase();
-//             const users = rows.childNodes[2].textContent.toLowerCase();
-//             const dob = rows.childNodes[3].textContent;
-//             const startdate = rows.childNodes[4].textContent;
-//             const enddate = rows.childNodes[5].textContent;
-//             if (name.includes(filtnameinput) && users.includes(filtusersinput) && dob.includes(filtdobinput) && startdate.includes(filtstartdateinput) && enddate.includes(filtenddateinput)  ) {
-//                 rows.style.display = "";
-//             } else 
-//             {
-//                 rows.style.display = "none";
-//             }
-//     }
-
-            // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks on the button, open the modal
-        // btn.onclick = function() {
-        //     console.log("Modal Button clicked")
-        //      modal.style.display = "block";
-        // }
-
-        // // When the user clicks on <span> (x), close the modal
-        // span.onclick = function() {
-        //     modal.style.display = "none";
-        // }
-
-        // // When the user clicks anywhere outside of the modal, close it
-        // window.onclick = function(event) {
-        //     if (event.target == modal) {
-        //         modal.style.display = "none";
-        //     }   
-        // }
-
-        btn.addEventListener("click", popUpModal)
-
-        function popUpModal(e){
-            if(!e.target.className.contains("modal-btn")){
-                return ;
-            }
-            console.log("Modal Button clicked")
-        //      modal.style.display = "block";
-
-        }
-
+    //     document.getElementById("tbody").appendChild(tr);
+    // }
 });
