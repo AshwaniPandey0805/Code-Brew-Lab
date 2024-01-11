@@ -88,12 +88,9 @@
                         <label for="gender">Gender</label>
                         <div class="gender-div">
                             <label for="male">Male</label>
-                            <input type="radio" id="male" name="gender" value="Male">
-                        
+                            <input type="radio" id="male" name="gender" value="M">
                             <label for="female">Female</label>
-                            <input type="radio" id="female" name="gender" value="Female">
-                        
-                            
+                            <input type="radio" id="female" name="gender" value="F">
                         </div>
                         <small id="genderError">Please select a gender</small>
                     </div>
@@ -140,10 +137,18 @@
                     <th><input type="search" placeholder="Search" style="width: 100%;" id="filterUsername" ></th>
                     <th><input type="search" placeholder="Search" style="width: 100%;" id="filterEmail"></th>
                     <th><input type="search" placeholder="Search" style="width: 100%;" id="filterPhoneNumber"></th>
-                    <th><input type="search" placeholder="Search" style="width: 100%;"></th>
-                    <th><input type="search" placeholder="Search" style="width: 100%;"></th>
-                    <th><input type="search" placeholder="Search" style="width: 100%;"></th>
-                    <th><input type="search" placeholder="Search" style="width: 100%;"></th>
+                    <th>
+                        <select name="subject" id="filterSubjects">
+                            <option value="">Select</option>
+                            <option value="Math">Math</option>
+                            <option value="English">English</option>
+                            <option value="Science">Science</option>
+                            <option value="Hindi">Hindi</option>
+                        </select>
+                    </th>
+                    <th><input type="search" placeholder="Search" style="width: 100%;" id="filterGender" ></th>
+                    <th><input type="search" placeholder="Search" style="width: 100%;" id="filterStartDate" ></th>
+                    <th><input type="search" placeholder="Search" style="width: 100%;" id="filterEndDate" ></th>
                     <th></th>
                     
                 </tr>
@@ -251,14 +256,13 @@
                         <button type="reset" >Reset</button>
                     </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-              </div>
-                    
+                
+
             </div>
-          </div> 
     </div>
+
+
+    
     <script src="index.js" ></script>
 
 </body>

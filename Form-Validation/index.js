@@ -32,37 +32,37 @@ document.addEventListener('DOMContentLoaded', function () {
         e.preventDefault();
         const formData = loadFormDataIntoAnObject();
 
-        // if (isFormValid()) {
-        //     // Add data to the table
-        //     addDataToTable(formData);
-        //     //resetForm();
-        //     tfoot.style.visibility = "visible"
-        // }
+        if (isFormValid()) {
+            // Add data to the table
+            addDataToTable(formData);
+            //resetForm();
+            tfoot.style.visibility = "visible"
+        }
         
         
         //Validate unique email in the form
-            if (isEmailUnique(formData.email)) {
-                // Validate unique number form data
-                if( isNumberUnique(formData.phoneNumber)){
-                        //vakidate form
-                    if (isFormValid()) {
-                        // Add data to the table
-                        addDataToTable(formData);
-                        resetForm();
-                        tfoot.style.visibility = "visible"
-                    }
-                }else{
-                const phoneNumber = document.getElementById("phone");
-                showError(phoneNumber, "Phone number already exits");
+            // if (isEmailUnique(formData.email)) {
+            //     // Validate unique number form data
+            //     if( isNumberUnique(formData.phoneNumber)){
+            //             //vakidate form
+            //         if (isFormValid()) {
+            //             // Add data to the table
+            //             addDataToTable(formData);
+            //             resetForm();
+            //             tfoot.style.visibility = "visible"
+            //         }
+            //     }else{
+            //     const phoneNumber = document.getElementById("phone");
+            //     showError(phoneNumber, "Phone number already exits");
 
-                }
-            } 
-            else {
-            // Show error if email already exists
-                const email = document.getElementById("email");
-                showError(email, "Email already exits")
+            //     }
+            // } 
+            // else {
+            // // Show error if email already exists
+            //     const email = document.getElementById("email");
+            //     showError(email, "Email already exits")
         
-            }
+            // }
     }
     // function to load form data to an object
     function loadFormDataIntoAnObject(){
@@ -531,25 +531,113 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add event listeners for filter input fields
     const filterUsernameInput = document.getElementById("filterUsername");
     const filterEmailInput = document.getElementById("filterEmail");
-    const filterPhoneNumber = document.getElementById("filterPhoneNumber")
+    const filterPhoneNumber = document.getElementById("filterPhoneNumber");
+    const filterSubject = document.getElementById("filterSubjects")
+    const filterGender = document.getElementById("filterGender");
+
     filterEmailInput.addEventListener('input', filterTable);
     filterUsernameInput.addEventListener('input', filterTable);
     filterPhoneNumber.addEventListener("input", filterTable);
+    filterSubject.addEventListener("input", filterTable);
+    filterGender.addEventListener("input", filterTable);
+
+
     function filterTable(){
         const filterUsername = filterUsernameInput.value.toLowerCase();
         const filterEmail = filterEmailInput.value.toLowerCase();
         const filterPhoneNumberValue = filterPhoneNumber.value;
+        const filterSubjectValue = filterSubject.value.toLowerCase();
+        const filterGenderValue = filterGender.value.toLowerCase();
         const rows = document.querySelectorAll('.data-table tbody tr');
+        console.log(rows);
         rows.forEach(row => {
             const username = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
             const email = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
             const phoneNumber = row.querySelector('td:nth-child(4)').textContent;
-
-            if (username.includes(filterUsername) && email.includes(filterEmail) && phoneNumber.includes(filterPhoneNumberValue) ) {
+            const subject = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+            const gender = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+            if (username.includes(filterUsername) && email.includes(filterEmail) && phoneNumber.includes(filterPhoneNumberValue) && subject.includes(filterSubjectValue) && gender.includes(filterGenderValue)){
                 row.style.display = "";
             } else {
                 row.style.display = "none";
             }
         });
     }
+
+
+//     const filtname= document.querySelector(".filtname");
+//   console.log(filtname);
+//   const filtusers= document.querySelector(".filtusers");
+//   const filtdob= document.querySelector(".filtdob");
+//   const filtstartdate= document.querySelector(".filtstartdate");
+//   const filtenddate= document.querySelector(".filtenddate");
+
+//   filtname.addEventListener("input",applyFilters);
+//   filtusers.addEventListener("input",applyFilters);
+//   filtdob.addEventListener("input",applyFilters);
+//   filtstartdate.addEventListener("input",applyFilters);
+//   filtenddate.addEventListener("input",applyFilters);
+
+//     function applyFilters()
+//     {
+//         const filtnameinput=filtname.value.toLowerCase();
+//         const filtusersinput=filtusers.value.toLowerCase();
+//         const filtdobinput= filtdob.value;
+//         const filtstartdateinput=filtstartdate.value;
+//         const filtenddateinput=filtenddate.value;
+//         const rows=[];
+//         idArray.forEach(id=> rows.push(document.getElementById(id)));
+//         console.log(rows);
+//         rows.forEach(rows=>{
+//             const name = rows.childNodes[1].textContent.toLowerCase();
+//             const users = rows.childNodes[2].textContent.toLowerCase();
+//             const dob = rows.childNodes[3].textContent;
+//             const startdate = rows.childNodes[4].textContent;
+//             const enddate = rows.childNodes[5].textContent;
+//             if (name.includes(filtnameinput) && users.includes(filtusersinput) && dob.includes(filtdobinput) && startdate.includes(filtstartdateinput) && enddate.includes(filtenddateinput)  ) {
+//                 rows.style.display = "";
+//             } else 
+//             {
+//                 rows.style.display = "none";
+//             }
+//     }
+
+            // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        // btn.onclick = function() {
+        //     console.log("Modal Button clicked")
+        //      modal.style.display = "block";
+        // }
+
+        // // When the user clicks on <span> (x), close the modal
+        // span.onclick = function() {
+        //     modal.style.display = "none";
+        // }
+
+        // // When the user clicks anywhere outside of the modal, close it
+        // window.onclick = function(event) {
+        //     if (event.target == modal) {
+        //         modal.style.display = "none";
+        //     }   
+        // }
+
+        btn.addEventListener("click", popUpModal)
+
+        function popUpModal(e){
+            if(!e.target.className.contains("modal-btn")){
+                return ;
+            }
+            console.log("Modal Button clicked")
+        //      modal.style.display = "block";
+
+        }
+
 });
