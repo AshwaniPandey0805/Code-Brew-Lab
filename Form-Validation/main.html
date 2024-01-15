@@ -18,12 +18,15 @@
             color: black;
             border-radius: 5px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
-            width: 40%;
-            
-            padding: 20px;
-            position: sticky ;
-            top: 0px;
-            bottom: 0px;
+            width: 20%;
+            padding: 30px;
+            position: sticky;
+            margin-top: 200px;
+            top: 200px;
+            bottom: 0;
+
+    
+             
         }
 
         .list-container {
@@ -35,13 +38,129 @@
             width: 60%; 
             margin: 0px 10px 10px 10px;
             padding: 20px;
+            position: absolute;
+            visibility: hidden; 
+            
         }
     </style>
     
 </head>
 <body style="background-color: rgba(0,0,0,0.78) ;" >
     <div class="container">
-        <form id="form" class="form1">
+        <!-- Login form -->
+        <div class="login-form" >
+            <h3>Login</h3>
+            <div class="form-control1">
+                <label for="LoginUsername">Username</label>
+                <input type="text" placeholder="Enter Username" id="loginUsername">
+                <small>Error Message Will Displated Here</small>
+            </div> 
+            <div class="form-control1">
+                <label for="loginPassword">Password </label>
+                <input type="password" placeholder="Enter Username" id="loginPassword">
+                <small>Error Message Will Displated Here</small>
+            </div>
+            <button id="login-btn">Sign In</button>
+            
+        </div>
+        <!-- Logout-form -->
+        <div class="logout-form">
+            <div class="addUser">
+                <h4>Add more user</h4>
+                <button class="btn btn-success" id="add-on-user">Add more User</button>
+            </div>
+            <div class="logout">
+                <h2>Free to Sign Out</h2>
+                <button class="btn btn-primary" id="logout-btn" >Log Out</button>
+            </div>
+
+        </div>
+        <!-- login form -->
+        <div class="modal" id="loginModal" role="dialog">
+            <div class="modal-dialog">
+                
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" id="cancel-btn">X</button>
+                        <h1 class="modal-title">Registration With Us 💻 </h1>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form" class="form1">
+                            
+                            <div class="main-content">
+                                <div class="left">
+                                    <div class="form-control1">
+                                        <label for="username">Username:</label>
+                                        <input type="text" id="username" placeholder="Enter Username">
+                                        <small>Error Message Will Be Displayed Here</small>
+                                    </div>
+                                    <div class="form-control1">
+                                        <label for="email">Email:</label>
+                                        <input type="text" id="email" placeholder="Enter Email">
+                                        <small>Error Message Will Be Displayed</small>
+                                    </div>
+                                    <div class="form-control1">
+                                        <label for="phone">Phone Number:</label>
+                                        <input type="text" id="phone" placeholder="Enter Phone Number">
+                                        <small>Error Message Will Be Displayed</small>
+                                    </div>
+                                    <div class="form-control1">
+                                        <label for="password">Password:</label>
+                                        <input type="password" id="password">
+                                        <small>Error Message Will Be Displayed</small>
+                                    </div>
+                                    <div class="form-control1">
+                                        <label for="cpassword">Confirm Password:</label>
+                                        <input type="password" id="cpassword">
+                                        <small>Error Message Will Be Displayed</small>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <div class="form-control1">
+                                        <label for="subjects">Select Subject</label>
+                                        <select name="subject" id="subjects">
+                                            <option value="">Select</option>
+                                            <option value="Math">Math</option>
+                                            <option value="English">English</option>
+                                            <option value="Science">Science</option>
+                                            <option value="Hindi">Hindi</option>
+                                        </select>
+                                        <small>Please select a subject</small>
+                                    </div>
+        
+                                    <div class="form-control2" id="genderContainer">
+                                        <label>Gender</label>
+                                        <div class="gender-div">
+                                            <label for="male">Male</label>
+                                            <input type="radio" id="male" name="gender" value="M">
+                                            <label for="female">Female</label>
+                                            <input type="radio" id="female" name="gender" value="F">
+                                        </div>
+                                        <small id="genderError">Please select a gender</small>
+                                    </div>
+                                    <div class="form-control1" id="startDateContainer">
+                                        <label for="startDate">Start Date</label>
+                                        <input type="date" id="startDate" name="startDate">
+                                        <small id="startDateError">Please select a start date</small>
+                                    </div>
+        
+                                    <div class="form-control1" id="endDateContainer">
+                                        <label for="endDate">End Date</label>
+                                        <input type="date" id="endDate" name="endDate">
+                                        <small id="endDateError">Please select an end date</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" id="submit-btn">Submit</button>
+                            <button type="reset">Reset</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <!-- <form id="form" class="form1">
             <h1>Registration With Us 💻</h1>
             <div class="main-content">
                 <div class="left">
@@ -108,20 +227,20 @@
                 </div>
             </div>
             <button type="submit" id="submit-btn">Submit</button>
-            <!-- <div>
-                <button id="update-btn" >Update</button>
-            </div> -->
+           
             <button type="reset" >Reset</button>
-        </form>
+        </form> -->
             <!-- <div>
                 <button id="update-btn" >Update</button>
             </div> -->
+        
     </div>
+
     <div class="list-container">
         <table class="table data-table">
             <thead>
                 <tr>
-                    <th rowspan="2" >Select All<input type="checkbox" id="selectAll"></th>
+                    <th>Select All<input type="checkbox" id="selectAll"></th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Phone Number</th>
@@ -200,6 +319,12 @@
                                     <input type="text" id="updatePhone" placeholder="Enter Phone Number">
                                     <small>Error Message Will Displayed</small>
                                 </div>
+                                <div class="form-control1">
+                                    <label for="reEnterPassword">Re-enter Password</label>
+                                    <input type="password" id="reEnterPassword" placeholder="Enter Password">
+                                    <small>Error Message Will Displayed</small>
+                                </div>
+                                
                                 
                             </div>
                             <div class="right">
@@ -247,14 +372,13 @@
                         <button type="reset" >Reset</button>
                     </form>
                 </div>
-                
-
             </div>
+        </div>
     </div>
 
-
-    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="index.js" ></script>
+
 
 </body>
 </html>

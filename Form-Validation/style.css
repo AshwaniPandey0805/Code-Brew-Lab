@@ -6,8 +6,8 @@ body {
     background-color: rgba(0,0,0,0.78);
     font-family: 'Open Sans', sans-serif;
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: start;
+    justify-content: start;
     min-height: 100vh;
     margin: 0;
   }
@@ -86,7 +86,7 @@ h1{
 
 .form-control1 input{
     border: 2px solid rgba(0,0,0,0.55);
-    border-radius: 4px;
+    border-radius: 10px;
     display: block;
     width: 100%;
     padding: 10px;
@@ -394,7 +394,75 @@ tbody tr:hover {
     
 }
 
-/* The Modal (background) */
+#login-btn{
+    
+    cursor: pointer;
+    background-color: #5e5e5e;
+    border: 1px solid #5e5e5e;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+    display: block;
+    width: 75%;
+    margin: auto;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+#login-btn:hover{
+    /* background-color:  */
+    background-color: #777;;
+}   
+
+h3{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 900;
+
+}
+
+#logout-btn, #add-on-user{
+    
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #fff;
+    padding: 10px;
+    display: block;
+    width: 75%;
+    margin: auto;
+    margin-top: 10px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+.addUser h4{
+    text-align: center;
+}
+.logout h2{
+    text-align: center;
+}
+
+.login-form{
+    visibility: visible;
+    position: relative;
+}
+
+.logout-form{
+    visibility: hidden;
+    position: absolute;
+}
+
+
+
+
+
+
+
 
   
 

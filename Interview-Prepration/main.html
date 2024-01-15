@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Box</title>
+    <style>
+        body{
+            background-color: rgba(0, 0, 0, 0.78);
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Check Box</h1>
+    <label for="">Select Check Box</label>
+    <input type="checkbox" value="Selected" id="checkBox">
+
+
+    <script>
+        const checked = document.getElementById("checkBox");
+        
+
+        checked.addEventListener("click", ()=>{
+            console.log(checked.checked);
+            if(checked.checked){
+                alert("You cheaked the selection")
+            }else{
+                alert("you unchecled the selection");
+            }
+        })
+    </script>
+    
+</body>
+</html>
