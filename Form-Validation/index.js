@@ -730,28 +730,45 @@ document.addEventListener('DOMContentLoaded', function () {
     // delete all fucntionality
     deleteAllButton.addEventListener("click", deleteAllRows);
     function deleteAllRows(){
-        const askForDelete = prompt('Are you sure, you want to delete all')
-        if(askForDelete === "yes" || askForDelete === "YES" || askForDelete === "Yes"){
-            const tbody = document.querySelector('tbody');
-            tbody.innerHTML = "";
-            tfoot.style.visibility = "hidden"
 
-            // make update button hidde 
-            updatebtn.style.visibility = "hidden";
-            updatebtn.style.position = "absolute"
+        Swal.fire({
+            title: "Do you want to delete all the changes?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: `YES`,
+            denyButtonText: `NO`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire("Saved!", "", "success").then((result)=>{
+                console.log("Ho gaya click bhai")
+                if(result.isConfirmed){
+                    const tbody = document.querySelector('tbody');
+                    tbody.innerHTML = "";
+                    
+                    tfoot.style.visibility = "hidden"
+                    document.querySelector(".list-container").style.visibility = "hidden";
+                    document.querySelector(".list-container").style.position = "absolute";
 
-            //making submit button visible
-            const submitBtn = document.getElementById("submit-btn");
-            submitBtn.style.visibility = "visible";
-            submitBtn.style.position = "relative"
+                    document.getElementById("add-on-user").innerHTML = "Add User"
+                }
 
-            // make password and confirm paswword enable
-            password.disabled = false;
-            cpassword.disabled = false;
+                // // make update button hidde 
+                // updatebtn.style.visibility = "hidden";
+                // updatebtn.style.position = "absolute"
+                
+                //making submit button visible
+                // const submitBtn = document.getElementById("submit-btn");
+                // submitBtn.style.visibility = "visible";
+                // submitBtn.style.position = "relative"
 
-            // reset
-            resetForm();
-        }
+                // reset
+                resetForm();
+              });
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
     }
 
     // Add event listeners for filter input fields
@@ -794,12 +811,13 @@ document.addEventListener('DOMContentLoaded', function () {
     //--------------------------------------------------------------------------------
 
     // login portion
+
     // Login deatls array
     let loginDetialArray = [];
 
     document.getElementById("login-btn").addEventListener("click", (e)=>{
-        console.log(e.target)
-        console.log("login button clicked")
+        
+        
         const loginDetailObject = {
             loginUserName : LoginUserName.value,
             loginUserPassword : LoginPassword.value 
@@ -807,13 +825,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // pushing login details to an array
         if(LoginUserName.value.trim() !== ""  && LoginUserName.value.trim() !== ""){
-            
             loginDetialArray.push(loginDetailObject);
-
         }
-        
-
-        console.log(loginDetialArray);
         
         // auth
         const isLoginValid = authUserLoginDetail() ;
@@ -827,8 +840,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }).then((result) =>{
                 if(result.isConfirmed){
                     resetLoginDeatil()
-                    
-                    console.log(loginDetialArray);
                 }
             })
         }else{
@@ -853,36 +864,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     // make logout form visible
                     document.querySelector(".logout-form").style.visibility = "visible"
                     document.querySelector(".logout-form").style.position = "relative"
+
+                    
                 }
             })
-            
-
         }
-
-        // $("#myModal").modal("show"); 
-        // Swal.fire({
-        //     icon: "success",
-        //     title: "Login Successfully",
-        //     text: "User ",
-        // }).then((result) => {
-        //     // 'result' is an object containing information about the user's interaction
-        //     if (result.isConfirmed) {
-        //         // The user clicked the "OK" button
-        //         console.log("User clicked OK");
-        //         $("#loginModal").modal("show");
-        //         $('.modal-backdrop').remove();
-                
-        //         document.querySelector(".list-container").style.visibility = "hidden";
-        //         tfoot.style.visibility = "hidden"
-        //     } else {
-        //         // The user clicked the "Cancel" button or closed the modal
-        //         console.log("User closed the modal");
-        //     }
-        // });
     })
 
+    
+
     // Auth - User Login details
-    function authUserLoginDetail(obj){
+    function authUserLoginDetail(){
 
         // validate login UserName
         validateLoginUsername();
@@ -892,8 +884,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const errorElements = document.querySelectorAll('.error');
         return errorElements.length === 0;
-
-
     }
 
     // reset Login Details
@@ -904,4 +894,74 @@ document.addEventListener('DOMContentLoaded', function () {
         resetField(LoginPassword);
         console.log("Login form has been reseted");
     }
+
+    //---------------------------------------------------------------------------------
+
+    // Add Anothe User Functionaliy
+    document.getElementById("add-on-user").addEventListener("click", ()=>{
+                resetLoginDeatil()
+                $("#loginModal").modal("show");
+                $('.modal-backdrop').remove();
+
+                // make list-container visible
+                document.querySelector(".list-container").style.visibility = "hidden";
+                tfoot.style.visibility = "hidden"
+    })
+
+
+    //----------------------------------------------------------------------------
+    // logout Functionality
+
+    document.getElementById("logout-btn").addEventListener("click", ()=>{
+
+        document.querySelector(".list-container").style.visibility = "hidden";
+        tfoot.style.visibility = "hidden";
+
+        Swal.fire({
+            title: "Are you sure, you want to logout ?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "YES",
+            denyButtonText: `NO`
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              Swal.fire("Saved!", "", "success").then((result)=>{
+                if(result.isConfirmed){
+                    document.querySelector(".list-container").style.visibility = "hidden";
+                    document.querySelector(".list-container").style.position = "absolute";
+                    changeBehaviourOfLogOutAndLogInButton()
+                }
+              });
+            } else if (result.isDenied) {
+              Swal.fire("Changes are not saved", "", "info");
+            }
+          });
+        
+
+        // changeBehaviourOfLogOutAndLogInButton()
+
+        document.querySelector("tbody").innerHTML = ""
+    })
+
 }); 
+
+// Onclick event 
+function dataDismiss(){
+    $("#loginModal").modal('hide')
+
+    changeBehaviourOfLogOutAndLogInButton()
+
+}
+
+function changeBehaviourOfLogOutAndLogInButton(){
+     //make login form visible
+     document.querySelector(".login-form").style.visibility = "visible"
+     document.querySelector(".login-form").style.position = "relative"
+ 
+     // make logout form hidden
+     document.querySelector(".logout-form").style.visibility = "hidden"
+     document.querySelector(".logout-form").style.position = "absolute"
+
+}
+
